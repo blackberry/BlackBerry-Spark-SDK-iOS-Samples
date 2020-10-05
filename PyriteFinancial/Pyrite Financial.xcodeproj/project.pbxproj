@@ -1,0 +1,585 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1E0D46DA7162E41A93F50DF4 /* Pods_Pyrite_Financial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7498E538995947A572521A /* Pods_Pyrite_Financial.framework */; };
+		8B1134FC2522666B009D3194 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1134FB2522666B009D3194 /* SettingsVC.swift */; };
+		8B2B0BF924EB117600F8EA65 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2B0BF824EB117600F8EA65 /* MainVC.swift */; };
+		8B2B0BFD24EB16DA00F8EA65 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2B0BFC24EB16DA00F8EA65 /* CustomCell.swift */; };
+		8B5BBC3D24FC7E1C002D4C93 /* PFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BBC3C24FC7E1C002D4C93 /* PFApp.swift */; };
+		8B5BBC3F24FC840D002D4C93 /* VCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BBC3E24FC840D002D4C93 /* VCExtension.swift */; };
+		8B5BBC9724FD5975002D4C93 /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BBC9624FD5975002D4C93 /* MessageVC.swift */; };
+		8B5BBC9924FD88E5002D4C93 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BBC9824FD88E5002D4C93 /* MessagesVC.swift */; };
+		8B5BBC9B25001A84002D4C93 /* ThreatStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BBC9A25001A84002D4C93 /* ThreatStatusVC.swift */; };
+		8B5BBCB125013289002D4C93 /* pyrite.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5BBCB025013289002D4C93 /* pyrite.png */; };
+		8B5BBCBC25013354002D4C93 /* logotxtsmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5BBCB225013351002D4C93 /* logotxtsmall.png */; };
+		8B5BBCBD25013354002D4C93 /* purchase.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5BBCB325013351002D4C93 /* purchase.png */; };
+		8B5BBCBE25013354002D4C93 /* mortgage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5BBCB425013351002D4C93 /* mortgage.png */; };
+		8B5BBCBF25013354002D4C93 /* logoimage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8B5BBCB525013352002D4C93 /* logoimage.jpg */; };
+		8B5BBCC025013354002D4C93 /* investments.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5BBCB625013352002D4C93 /* investments.png */; };
+		8B5BBCC125013354002D4C93 /* account_balance.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5BBCB725013352002D4C93 /* account_balance.png */; };
+		8B5BBCC225013354002D4C93 /* messages.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5BBCB825013353002D4C93 /* messages.png */; };
+		8B5BBCC325013354002D4C93 /* send_pyrite.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5BBCB925013353002D4C93 /* send_pyrite.png */; };
+		8B5BBCC525013354002D4C93 /* message_list_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5BBCBB25013353002D4C93 /* message_list_icon.png */; };
+		8B5BBCC8250914E0002D4C93 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 8B5BBCC7250914E0002D4C93 /* LICENSE */; };
+		8B5BBCCA25093090002D4C93 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8B5BBCC925093090002D4C93 /* README.md */; };
+		8B77D0AA251B8E750069D566 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B77D0A9251B8E750069D566 /* GoogleService-Info.plist */; };
+		8BC02B4824DC6AC900F4962C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC02B4724DC6AC900F4962C /* AppDelegate.swift */; };
+		8BC02B4A24DC6AC900F4962C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC02B4924DC6AC900F4962C /* SceneDelegate.swift */; };
+		8BC02B4C24DC6AC900F4962C /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC02B4B24DC6AC900F4962C /* LoginVC.swift */; };
+		8BC02B4F24DC6AC900F4962C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BC02B4D24DC6AC900F4962C /* Main.storyboard */; };
+		8BC02B5124DC6ACC00F4962C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BC02B5024DC6ACC00F4962C /* Assets.xcassets */; };
+		8BC02B5424DC6ACC00F4962C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BC02B5224DC6ACC00F4962C /* LaunchScreen.storyboard */; };
+		8BC41791252783B200036ACC /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC41790252783B200036ACC /* AccountVC.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8B3EC26E24E19FC000ACDC9B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2A7498E538995947A572521A /* Pods_Pyrite_Financial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pyrite_Financial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DED732D4A38B75FB47F812F /* Pods-Pyrite Financial.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pyrite Financial.release.xcconfig"; path = "Target Support Files/Pods-Pyrite Financial/Pods-Pyrite Financial.release.xcconfig"; sourceTree = "<group>"; };
+		681A3797453FAAA32A9CB45E /* Pods-Pyrite Financial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pyrite Financial.debug.xcconfig"; path = "Target Support Files/Pods-Pyrite Financial/Pods-Pyrite Financial.debug.xcconfig"; sourceTree = "<group>"; };
+		8B1134FB2522666B009D3194 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		8B2B0BF824EB117600F8EA65 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		8B2B0BFC24EB16DA00F8EA65 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		8B5BBC3C24FC7E1C002D4C93 /* PFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PFApp.swift; sourceTree = "<group>"; };
+		8B5BBC3E24FC840D002D4C93 /* VCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCExtension.swift; sourceTree = "<group>"; };
+		8B5BBC9624FD5975002D4C93 /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
+		8B5BBC9824FD88E5002D4C93 /* MessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
+		8B5BBC9A25001A84002D4C93 /* ThreatStatusVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreatStatusVC.swift; sourceTree = "<group>"; };
+		8B5BBCB025013289002D4C93 /* pyrite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pyrite.png; sourceTree = "<group>"; };
+		8B5BBCB225013351002D4C93 /* logotxtsmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logotxtsmall.png; sourceTree = "<group>"; };
+		8B5BBCB325013351002D4C93 /* purchase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purchase.png; sourceTree = "<group>"; };
+		8B5BBCB425013351002D4C93 /* mortgage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mortgage.png; sourceTree = "<group>"; };
+		8B5BBCB525013352002D4C93 /* logoimage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logoimage.jpg; sourceTree = "<group>"; };
+		8B5BBCB625013352002D4C93 /* investments.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = investments.png; sourceTree = "<group>"; };
+		8B5BBCB725013352002D4C93 /* account_balance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = account_balance.png; sourceTree = "<group>"; };
+		8B5BBCB825013353002D4C93 /* messages.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messages.png; sourceTree = "<group>"; };
+		8B5BBCB925013353002D4C93 /* send_pyrite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_pyrite.png; sourceTree = "<group>"; };
+		8B5BBCBB25013353002D4C93 /* message_list_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message_list_icon.png; sourceTree = "<group>"; };
+		8B5BBCC7250914E0002D4C93 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		8B5BBCC925093090002D4C93 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8B77D0A9251B8E750069D566 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8B77D0AC251B903E0069D566 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BC02B4424DC6AC900F4962C /* Pyrite Financial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pyrite Financial.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BC02B4724DC6AC900F4962C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8BC02B4924DC6AC900F4962C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		8BC02B4B24DC6AC900F4962C /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		8BC02B4E24DC6AC900F4962C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8BC02B5024DC6ACC00F4962C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8BC02B5324DC6ACC00F4962C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8BC41790252783B200036ACC /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8BC02B4124DC6AC900F4962C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E0D46DA7162E41A93F50DF4 /* Pods_Pyrite_Financial.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		76FE1103623D08EDCA03B7C0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				681A3797453FAAA32A9CB45E /* Pods-Pyrite Financial.debug.xcconfig */,
+				2DED732D4A38B75FB47F812F /* Pods-Pyrite Financial.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		8B77D0A42511139B0069D566 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8B5BBC3E24FC840D002D4C93 /* VCExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8B77D0A5251113AF0069D566 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8B5BBC9A25001A84002D4C93 /* ThreatStatusVC.swift */,
+				8B2B0BF824EB117600F8EA65 /* MainVC.swift */,
+				8B1134FB2522666B009D3194 /* SettingsVC.swift */,
+				8BC41790252783B200036ACC /* AccountVC.swift */,
+				8BC02B4B24DC6AC900F4962C /* LoginVC.swift */,
+				8B5BBC9824FD88E5002D4C93 /* MessagesVC.swift */,
+				8B5BBC9624FD5975002D4C93 /* MessageVC.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		8B77D0A6251113C70069D566 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				8B5BBCB025013289002D4C93 /* pyrite.png */,
+				8B5BBCB725013352002D4C93 /* account_balance.png */,
+				8B5BBCB625013352002D4C93 /* investments.png */,
+				8B5BBCB525013352002D4C93 /* logoimage.jpg */,
+				8B5BBCB225013351002D4C93 /* logotxtsmall.png */,
+				8B5BBCBB25013353002D4C93 /* message_list_icon.png */,
+				8B5BBCB825013353002D4C93 /* messages.png */,
+				8B5BBCB425013351002D4C93 /* mortgage.png */,
+				8B5BBCB325013351002D4C93 /* purchase.png */,
+				8B5BBCB925013353002D4C93 /* send_pyrite.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		8B77D0A7251113DB0069D566 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8B2B0BFC24EB16DA00F8EA65 /* CustomCell.swift */,
+				8BC02B4D24DC6AC900F4962C /* Main.storyboard */,
+				8BC02B5224DC6ACC00F4962C /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8B77D0A8251113F60069D566 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8B77D0AC251B903E0069D566 /* Info.plist */,
+				8B77D0A9251B8E750069D566 /* GoogleService-Info.plist */,
+				8BC02B5024DC6ACC00F4962C /* Assets.xcassets */,
+				8B77D0A6251113C70069D566 /* Images */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8BC02B3B24DC6AC900F4962C = {
+			isa = PBXGroup;
+			children = (
+				8B5BBCC925093090002D4C93 /* README.md */,
+				8B5BBCC7250914E0002D4C93 /* LICENSE */,
+				8BC02B4624DC6AC900F4962C /* Pyrite Financial */,
+				8BC02B4524DC6AC900F4962C /* Products */,
+				76FE1103623D08EDCA03B7C0 /* Pods */,
+				B250428F708082E728F7F604 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8BC02B4524DC6AC900F4962C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8BC02B4424DC6AC900F4962C /* Pyrite Financial.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8BC02B4624DC6AC900F4962C /* Pyrite Financial */ = {
+			isa = PBXGroup;
+			children = (
+				8BC02B4724DC6AC900F4962C /* AppDelegate.swift */,
+				8B5BBC3C24FC7E1C002D4C93 /* PFApp.swift */,
+				8BC02B4924DC6AC900F4962C /* SceneDelegate.swift */,
+				8B77D0A5251113AF0069D566 /* View Controllers */,
+				8B77D0A42511139B0069D566 /* Extensions */,
+				8B77D0A7251113DB0069D566 /* View */,
+				8B77D0A8251113F60069D566 /* Supporting Files */,
+			);
+			path = "Pyrite Financial";
+			sourceTree = "<group>";
+		};
+		B250428F708082E728F7F604 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2A7498E538995947A572521A /* Pods_Pyrite_Financial.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8BC02B4324DC6AC900F4962C /* Pyrite Financial */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BC02B5824DC6ACC00F4962C /* Build configuration list for PBXNativeTarget "Pyrite Financial" */;
+			buildPhases = (
+				2F2C8B826D7FB0037523CB63 /* [CP] Check Pods Manifest.lock */,
+				BEDC8A6C25C8CC87D5A6F28A /* [CP] Prepare Artifacts */,
+				8BC02B4024DC6AC900F4962C /* Sources */,
+				8BC02B4124DC6AC900F4962C /* Frameworks */,
+				8BC02B4224DC6AC900F4962C /* Resources */,
+				0427C08B8B8E32906A574432 /* [CP] Embed Pods Frameworks */,
+				8B3EC26E24E19FC000ACDC9B /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pyrite Financial";
+			productName = "Pyrite Financial";
+			productReference = 8BC02B4424DC6AC900F4962C /* Pyrite Financial.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8BC02B3C24DC6AC900F4962C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = gghangura;
+				TargetAttributes = {
+					8BC02B4324DC6AC900F4962C = {
+						CreatedOnToolsVersion = 11.4;
+					};
+				};
+			};
+			buildConfigurationList = 8BC02B3F24DC6AC900F4962C /* Build configuration list for PBXProject "Pyrite Financial" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8BC02B3B24DC6AC900F4962C;
+			productRefGroup = 8BC02B4524DC6AC900F4962C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8BC02B4324DC6AC900F4962C /* Pyrite Financial */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8BC02B4224DC6AC900F4962C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B77D0AA251B8E750069D566 /* GoogleService-Info.plist in Resources */,
+				8B5BBCBF25013354002D4C93 /* logoimage.jpg in Resources */,
+				8B5BBCC325013354002D4C93 /* send_pyrite.png in Resources */,
+				8B5BBCBD25013354002D4C93 /* purchase.png in Resources */,
+				8B5BBCC525013354002D4C93 /* message_list_icon.png in Resources */,
+				8B5BBCCA25093090002D4C93 /* README.md in Resources */,
+				8B5BBCBC25013354002D4C93 /* logotxtsmall.png in Resources */,
+				8B5BBCC025013354002D4C93 /* investments.png in Resources */,
+				8BC02B5424DC6ACC00F4962C /* LaunchScreen.storyboard in Resources */,
+				8BC02B5124DC6ACC00F4962C /* Assets.xcassets in Resources */,
+				8B5BBCC225013354002D4C93 /* messages.png in Resources */,
+				8B5BBCC125013354002D4C93 /* account_balance.png in Resources */,
+				8B5BBCBE25013354002D4C93 /* mortgage.png in Resources */,
+				8B5BBCB125013289002D4C93 /* pyrite.png in Resources */,
+				8BC02B4F24DC6AC900F4962C /* Main.storyboard in Resources */,
+				8B5BBCC8250914E0002D4C93 /* LICENSE in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0427C08B8B8E32906A574432 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pyrite Financial/Pods-Pyrite Financial-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pyrite Financial/Pods-Pyrite Financial-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Pyrite Financial/Pods-Pyrite Financial-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2F2C8B826D7FB0037523CB63 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Pyrite Financial-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BEDC8A6C25C8CC87D5A6F28A /* [CP] Prepare Artifacts */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pyrite Financial/Pods-Pyrite Financial-artifacts-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Prepare Artifacts";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pyrite Financial/Pods-Pyrite Financial-artifacts-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Pyrite Financial/Pods-Pyrite Financial-artifacts.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8BC02B4024DC6AC900F4962C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B1134FC2522666B009D3194 /* SettingsVC.swift in Sources */,
+				8B5BBC9924FD88E5002D4C93 /* MessagesVC.swift in Sources */,
+				8B5BBC9B25001A84002D4C93 /* ThreatStatusVC.swift in Sources */,
+				8B5BBC9724FD5975002D4C93 /* MessageVC.swift in Sources */,
+				8BC02B4C24DC6AC900F4962C /* LoginVC.swift in Sources */,
+				8B2B0BF924EB117600F8EA65 /* MainVC.swift in Sources */,
+				8B2B0BFD24EB16DA00F8EA65 /* CustomCell.swift in Sources */,
+				8BC02B4824DC6AC900F4962C /* AppDelegate.swift in Sources */,
+				8BC41791252783B200036ACC /* AccountVC.swift in Sources */,
+				8B5BBC3F24FC840D002D4C93 /* VCExtension.swift in Sources */,
+				8BC02B4A24DC6AC900F4962C /* SceneDelegate.swift in Sources */,
+				8B5BBC3D24FC7E1C002D4C93 /* PFApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8BC02B4D24DC6AC900F4962C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BC02B4E24DC6AC900F4962C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8BC02B5224DC6ACC00F4962C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BC02B5324DC6ACC00F4962C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8BC02B5624DC6ACC00F4962C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8BC02B5724DC6ACC00F4962C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8BC02B5924DC6ACC00F4962C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 681A3797453FAAA32A9CB45E /* Pods-Pyrite Financial.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7QTYGGGMUN;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Pyrite Financial/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pyritefinancial.consumer.services;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8BC02B5A24DC6ACC00F4962C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2DED732D4A38B75FB47F812F /* Pods-Pyrite Financial.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7QTYGGGMUN;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Pyrite Financial/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pyritefinancial.consumer.services;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8BC02B3F24DC6AC900F4962C /* Build configuration list for PBXProject "Pyrite Financial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BC02B5624DC6ACC00F4962C /* Debug */,
+				8BC02B5724DC6ACC00F4962C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8BC02B5824DC6ACC00F4962C /* Build configuration list for PBXNativeTarget "Pyrite Financial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BC02B5924DC6ACC00F4962C /* Debug */,
+				8BC02B5A24DC6ACC00F4962C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8BC02B3C24DC6AC900F4962C /* Project object */;
+}

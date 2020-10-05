@@ -1,0 +1,13 @@
+# Uncomment the next line to define a global platform for your project
+ platform :ios, '12.0'
+
+target 'Pyrite Financial' do
+  use_frameworks!
+  #IQKeyboardManager is used to auto adjust the layout when the keyboard is open
+  pod 'IQKeyboardManagerSwift'
+  #Firebase Auth is used as an Identity Manager in the app
+  pod 'Firebase/Auth'
+  
+  pod 'BlackBerrySecurity', :podspec => 'https://bbapps.download.blackberry.com/repository/framework/appsecure/ios/BlackBerrySecurity-latest.podspec'
+  
+end

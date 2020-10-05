@@ -14,8 +14,8 @@ For additional information, see the [Developer Guide](https://docs.blackberry.co
 
 ## Prerequisites 
 
-- Install Xcode 11
-- CocoaPods 1.7
+- Install Xcode 11 or later
+- CocoaPods 1.7 or later
 
 ## Getting Started
 

@@ -7,7 +7,7 @@ target 'Pyrite Financial' do
   pod 'IQKeyboardManagerSwift'
   #Firebase Auth is used as an Identity Manager in the app
   pod 'Firebase/Auth'
-  
-  pod 'BlackBerrySecurity', :podspec => 'https://bbapps.download.blackberry.com/repository/framework/appsecure/ios/BlackBerrySecurity-latest.podspec'
-  
+
+  pod 'BlackBerrySecurity', :podspec => 'https://software.download.blackberry.com/repository/framework/appsecure/ios/BlackBerrySecurity-latest.podspec'
+
 end

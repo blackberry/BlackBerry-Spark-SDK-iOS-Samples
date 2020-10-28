@@ -17,11 +17,14 @@
 
 import UIKit
 import FirebaseAuth
+import BlackBerrySecurity
 
-class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PFAppState {
     
     @IBOutlet weak var collectionView: UICollectionView!
     let fileName = "Data_Collection.txt"
+    
+    var firstRun = true
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 6
@@ -72,9 +75,15 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         if PFApp.shared.alreadySignedIn() {
-            let threatStatusVC = self.storyboard?.instantiateViewController(identifier: "ThreatStatusVC")
-            self.present(threatStatusVC!, animated: true, completion: nil)
+        PFApp.shared.delegate = self
+        if PFApp.shared.alreadySignedIn() {
+            self.showSpinner(onView: self.view)
+            if SecurityControl.shared.state != .active {
+                PFApp.shared.getToken()
+            } else {
+                self.removeSpinner()
+                self.startApp()
+            }
         }
     }
     
@@ -89,6 +98,14 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         collectionView!.collectionViewLayout = layout
     }
     
+    func startApp() {
+        if !PFApp.shared.checkIfExists(fileName: self.fileName, create: false, initialValue: nil) {
+           self.collectData()
+       } else {
+           self.showThreatStatus()
+       }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         if !PFApp.shared.alreadySignedIn() {
             let loginVC = self.storyboard?.instantiateViewController(identifier: "LoginVC")
@@ -100,6 +117,35 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBAction func settingsButton(_ sender: Any) {
         let settingVC = self.storyboard?.instantiateViewController(identifier: "settingVC")
         self.navigationController?.pushViewController(settingVC!, animated: true)
+    }
+    
+    func showThreatStatus() {
+        let threatStatusVC = self.storyboard?.instantiateViewController(identifier: "ThreatStatusVC")
+        self.present(threatStatusVC!, animated: true, completion: nil)
+    }
+    
+    func collectData() {
+        let alert = UIAlertController(title: "Data Collection", message: "Do you want Spark SDK to collect Data", preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
+            PFApp.shared.saveInFile(fileName: self.fileName, value: "Yes");
+            self.showThreatStatus()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: { action in
+            PFApp.shared.saveInFile(fileName: self.fileName, value: "No");
+            self.showThreatStatus()
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func sparkSDKActive() {
+        if firstRun {
+            firstRun = false
+            self.removeSpinner()
+            self.startApp()
+        }
     }
     
 }

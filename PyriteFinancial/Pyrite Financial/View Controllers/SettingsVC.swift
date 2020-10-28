@@ -16,14 +16,22 @@
 
 import UIKit
 
-class SettingsVC: UIViewController {
+class SettingsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var sdkVersionLabel: UILabel!
     @IBOutlet weak var uploadStatus: UILabel!
+    @IBOutlet weak var minimumOSText: UITextField!
+    
+    let picker = UIPickerView()
+    
+    let myPickerData = ["11", "12", "13", "14"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         sdkVersionLabel.text = PFApp.shared.getVersion()
+        minimumOSText.inputView = picker
+        minimumOSText.text = PFApp.shared.getMinimumOSVersion()
+        picker.delegate = self
     }
     
     @IBAction func uploadLogs(_ sender: Any) {
@@ -37,5 +45,22 @@ class SettingsVC: UIViewController {
     @IBAction func displayThreatStatus(_ sender: Any) {
         let threatStatusVC = self.storyboard?.instantiateViewController(identifier: "ThreatStatusVC")
         self.navigationController?.pushViewController(threatStatusVC!, animated: true)
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return myPickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return myPickerData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        minimumOSText.text = myPickerData[row]
+        PFApp.shared.setMinimumOSVersion(OSVersion: myPickerData[row])
     }
 }

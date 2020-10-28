@@ -33,7 +33,7 @@ class ThreatStatusVC: UIViewController {
             self.dismissButton.isHidden = true
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(threatStatusChanged), name: NSNotification.Name.ThreatStatusNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(threatStatusChanged), name: ThreatStatus.threatStatusChangedNotification, object: nil)
         updateLabels()
         
     }

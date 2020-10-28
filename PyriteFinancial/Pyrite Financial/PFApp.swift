@@ -19,6 +19,10 @@ import Foundation
 import FirebaseAuth
 import BlackBerrySecurity
 
+protocol PFAppState {
+    func sparkSDKActive()
+}
+
 class PFApp {
     
     static let shared = PFApp()
@@ -27,7 +31,7 @@ class PFApp {
     
     private var currentUser : User!
     
-    let directoryName = "Pyrite"
+    var delegate: PFAppState!
     
     func alreadySignedIn() -> Bool {
         if let currentUser = Auth.auth().currentUser {
@@ -54,22 +58,23 @@ class PFApp {
     }
     
     func initSparkSDKWith(token: String) {
-        LibraryInit.shared.provideToken(token: token.data(using: .utf8)!)
-        LibraryInit.shared.onStateChange = handleStateChange
-        if LibraryInit.shared.state == .active {
-            configureDeviceSecurityRules()
-        }
+        SecurityControl.shared.provideToken(token: token.data(using: .utf8)!)
+        SecurityControl.shared.onStateChange = handleStateChange
+        handleStateChange(newState: SecurityControl.shared.state)
     }
     
     //This method listens to the state changes of the Spark SDK and when the token expires, gets a new token from Firebase Auth and provies it to the SDK.
     //When the states becomes active, Spark SDK APIs can be used to get get the threat status and manage rules
-    func handleStateChange(newState: LibraryInit.InitializationState) {
+    func handleStateChange(newState: SecurityControl.InitializationState) {
         switch newState {
         case .tokenExpired:
             getToken()
             break
         case .active:
             configureDeviceSecurityRules()
+            if delegate != nil {
+                delegate.sparkSDKActive()
+            }
             break
         default:
             break
@@ -81,9 +86,6 @@ class PFApp {
         deviceSecurityRule = deviceSecurityRule.enableCheck(check: .jailbreakDetection).enableCheck(check: .deviceLockScreen)
         
         ManageRules.setDeviceSecurityRules(rules: deviceSecurityRule)
-        
-        let deviceSoftwareRule = try! DeviceSoftwareRules.init(minimumOSVersion: "12.0", enableDeviceOSCheck: true)
-        ManageRules.setDeviceSoftwareRules(rules: deviceSoftwareRule)
     }
     
     func checkUrl(url : String, completion: @escaping (Bool) -> Void) {
@@ -105,7 +107,7 @@ class PFApp {
     }
     
     func isDeviceOSRestricted() -> Bool {
-        let deviceOSThreat = ThreatStatus().getThreat(by: .deviceOS) as! ThreatDeviceSoftware
+        let deviceOSThreat = ThreatStatus().getThreat(by: .deviceSoftware) as! ThreatDeviceSoftware
         return deviceOSThreat.isDeviceOSRestricted()
     }
     
@@ -119,6 +121,15 @@ class PFApp {
         return deviceSecurity.isDeviceCompromised()
     }
     
+    func setMinimumOSVersion(OSVersion: String) {
+        let deviceSoftwareRule = try! DeviceSoftwareRules.init(minimumOSVersion: OSVersion, enableDeviceOSCheck: true)
+        ManageRules.setDeviceSoftwareRules(rules: deviceSoftwareRule)
+    }
+    
+    func getMinimumOSVersion() -> String {
+        return try! ManageRules.getDeviceSoftwareRules().getMinimumOSVersion()
+    }
+    
     func updateThreatStatus() {
         DeviceChecker.checkDeviceSecurity()
     }
@@ -128,7 +139,7 @@ class PFApp {
     }
     
     func uploadLogs(callback: @escaping (String) -> Void) {
-        Diagnostics.uploadLogs { (status) in
+        Diagnostics.uploadLogs(reason: "Uploading Logs from Settings") { (status) in
             switch status {
             case .busy:
                 callback("Busy")
@@ -177,12 +188,11 @@ class PFApp {
         let filePath = getDocumentsDirectory(fileName: fileName)
         
         _ = BBSFileManager.default!.createFileAt(path: filePath, contents: value.data(using: .utf8), attributes: nil)
-        
     }
     
     func getDocumentsDirectory(fileName : String) -> String {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let paths = FileManager.default.urls(for: .applicationDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
-        return documentsDirectory.absoluteString + directoryName + "/" + fileName
+        return documentsDirectory.path + fileName
     }
 }

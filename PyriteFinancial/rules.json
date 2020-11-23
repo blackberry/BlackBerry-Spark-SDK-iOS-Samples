@@ -1,0 +1,29 @@
+{
+	"ContentCheckerRules": {
+		"SafeBrowsing_CheckType": "CLOUD",
+		"SafeMessaging_CheckType": "CHECK_LIST_ONLY",
+		"DeviceSecurity_CheckType": "CLOUD",
+		"DeviceSoftware_CheckType": "ON_DEVICE",
+		"AllowedDomainURLs": [],
+		"DisallowedDomainURLs": [],
+		"AllowedIPs": [],
+		"DisallowedIPs": []
+	},
+	"DeviceSecurityRules": {
+		"DeviceLockScreen_Check": "Enabled",
+		"DeviceLockScreen_EnforcementAction": "NOTIFY",
+		"DebugDetection_Check": "Enabled",
+		"DebugDetection_EnforcementAction": "NOTIFY",
+		"JailbreakDetection_Check": "Enabled",
+		"HookDetection_Check": "Enabled"
+	},
+	"iOSDeviceSoftwareRules": {
+		"DeviceOSSoftware_Check": "Enabled",
+		"MinimumOSVersion": "12"
+	},
+	"DataCollectionRules": {
+		"DataCollectionEnabled": "Enabled",
+		"UploadType": "WIFI_WHILE_CHARGING",
+		"UploadMonthlyLimit": "LIMIT_10MB"
+	}
+}		

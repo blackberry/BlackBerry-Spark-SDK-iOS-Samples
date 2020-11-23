@@ -22,7 +22,6 @@ import BlackBerrySecurity
 class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PFAppState {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    let fileName = "Data_Collection.txt"
     
     var firstRun = true
     
@@ -99,11 +98,7 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func startApp() {
-        if !PFApp.shared.checkIfExists(fileName: self.fileName, create: false, initialValue: nil) {
-           self.collectData()
-       } else {
-           self.showThreatStatus()
-       }
+        self.showThreatStatus()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -122,22 +117,6 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     func showThreatStatus() {
         let threatStatusVC = self.storyboard?.instantiateViewController(identifier: "ThreatStatusVC")
         self.present(threatStatusVC!, animated: true, completion: nil)
-    }
-    
-    func collectData() {
-        let alert = UIAlertController(title: "Data Collection", message: "Do you want Spark SDK to collect Data", preferredStyle: UIAlertController.Style.alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
-            PFApp.shared.saveInFile(fileName: self.fileName, value: "Yes");
-            self.showThreatStatus()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: { action in
-            PFApp.shared.saveInFile(fileName: self.fileName, value: "No");
-            self.showThreatStatus()
-        }))
-        
-        self.present(alert, animated: true, completion: nil)
     }
     
     func sparkSDKActive() {

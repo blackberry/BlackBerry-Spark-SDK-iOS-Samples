@@ -71,21 +71,19 @@ class PFApp {
             getToken()
             break
         case .active:
-            configureDeviceSecurityRules()
             if delegate != nil {
                 delegate.sparkSDKActive()
             }
+            NotificationCenter.default.addObserver(self, selector: #selector(threatStatusChanged), name: ThreatStatus.threatStatusChangedNotification, object: nil)
             break
         default:
             break
         }
     }
     
-    func configureDeviceSecurityRules() {
-        var deviceSecurityRule = DeviceSecurityRules.init(featureStatus: .disabled)
-        deviceSecurityRule = deviceSecurityRule.enableCheck(check: .jailbreakDetection).enableCheck(check: .deviceLockScreen)
-        
-        ManageRules.setDeviceSecurityRules(rules: deviceSecurityRule)
+    @objc func threatStatusChanged(notification: NSNotification) {
+        let threatStatusVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "ThreatStatusVC")
+        UIApplication.shared.windows.last?.rootViewController?.present(threatStatusVC, animated: true, completion: nil)
     }
     
     func checkUrl(url : String, completion: @escaping (Bool) -> Void) {
@@ -126,16 +124,20 @@ class PFApp {
         ManageRules.setDeviceSoftwareRules(rules: deviceSoftwareRule)
     }
     
-    func getMinimumOSVersion() -> String {
-        return try! ManageRules.getDeviceSoftwareRules().getMinimumOSVersion()
-    }
-    
     func updateThreatStatus() {
         DeviceChecker.checkDeviceSecurity()
     }
     
     func getVersion() -> String {
         return Diagnostics.getRuntimeVersion();
+    }
+    
+    func getContainerId() -> String {
+        return Diagnostics.getBlackBerryAppContainerID()
+    }
+    
+    func getInstanceIdentifier() -> String {
+        return AppIdentity.getAppInstanceIdentifier()
     }
     
     func uploadLogs(callback: @escaping (String) -> Void) {

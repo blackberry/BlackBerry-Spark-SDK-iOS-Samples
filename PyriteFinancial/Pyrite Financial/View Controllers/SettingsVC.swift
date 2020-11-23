@@ -16,28 +16,48 @@
 
 import UIKit
 
-class SettingsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class SettingsVC: UIViewController {
     
     @IBOutlet weak var sdkVersionLabel: UILabel!
     @IBOutlet weak var uploadStatus: UILabel!
-    @IBOutlet weak var minimumOSText: UITextField!
-    
-    let picker = UIPickerView()
-    
-    let myPickerData = ["11", "12", "13", "14"]
+    @IBOutlet weak var instanceIdentifierLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         sdkVersionLabel.text = PFApp.shared.getVersion()
-        minimumOSText.inputView = picker
-        minimumOSText.text = PFApp.shared.getMinimumOSVersion()
-        picker.delegate = self
+        instanceIdentifierLabel.text = PFApp.shared.getInstanceIdentifier()
+    }
+    
+    @IBAction func getNewRules(_ sender: Any) {
+        var request = URLRequest(url: URL(string: "https://raw.githubusercontent.com/gghangura/rules/master/rules.json")!)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        self.showSpinner(onView: self.view)
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+            self.removeSpinner()
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                Rules.init().updateRules(newRules: json)
+            } catch {
+                self.showAlert(title: "Error", message: "The file could not fetched. Check the URL", callback: {})
+            }
+        })
+
+        task.resume()
     }
     
     @IBAction func uploadLogs(_ sender: Any) {
         PFApp.shared.uploadLogs { (status) in
             DispatchQueue.main.async {
                 self.uploadStatus.text = status
+                
+                if status == "Completed" {
+                    self.showAlert(title: "Upload Successful", message: "Logs uploaded with ContainerID - " + PFApp.shared.getContainerId(), callback: {})
+                }
+                
             }
         }
     }
@@ -45,22 +65,5 @@ class SettingsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     @IBAction func displayThreatStatus(_ sender: Any) {
         let threatStatusVC = self.storyboard?.instantiateViewController(identifier: "ThreatStatusVC")
         self.navigationController?.pushViewController(threatStatusVC!, animated: true)
-    }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return myPickerData[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return myPickerData.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        minimumOSText.text = myPickerData[row]
-        PFApp.shared.setMinimumOSVersion(OSVersion: myPickerData[row])
     }
 }

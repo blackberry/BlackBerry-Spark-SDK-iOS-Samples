@@ -127,4 +127,11 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
+    func sparkAuthRequired() {
+        self.removeSpinner()
+        let passwordVC = self.storyboard?.instantiateViewController(identifier: "PasswordVC")
+        passwordVC!.isModalInPresentation = true
+        self.present(passwordVC!, animated: true, completion: nil)
+    }
+    
 }

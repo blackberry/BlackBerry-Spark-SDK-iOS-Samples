@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E0D46DA7162E41A93F50DF4 /* Pods_Pyrite_Financial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7498E538995947A572521A /* Pods_Pyrite_Financial.framework */; };
 		8B06D5252550A33500B5FEE0 /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B06D5242550A33500B5FEE0 /* Rules.swift */; };
 		8B1134FC2522666B009D3194 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1134FB2522666B009D3194 /* SettingsVC.swift */; };
 		8B2B0BF924EB117600F8EA65 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2B0BF824EB117600F8EA65 /* MainVC.swift */; };
@@ -30,7 +29,23 @@
 		8B5BBCC8250914E0002D4C93 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 8B5BBCC7250914E0002D4C93 /* LICENSE */; };
 		8B5BBCCA25093090002D4C93 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8B5BBCC925093090002D4C93 /* README.md */; };
 		8B77D0AA251B8E750069D566 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B77D0A9251B8E750069D566 /* GoogleService-Info.plist */; };
+		8B971B7B258D2B51003EC3BD /* PasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B971B7A258D2B51003EC3BD /* PasswordVC.swift */; };
+		8B971B94258D4908003EC3BD /* Pods_Pyrite_Financial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7498E538995947A572521A /* Pods_Pyrite_Financial.framework */; };
+		8B971B95258D4908003EC3BD /* Pods_Pyrite_Financial.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2A7498E538995947A572521A /* Pods_Pyrite_Financial.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8BA2D51C255DBABE002EDD1A /* rules.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BA2D51B255DBABD002EDD1A /* rules.json */; };
+		8BA8FBAD258D1D3300839173 /* one.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA8FBA0258D1D3200839173 /* one.png */; };
+		8BA8FBAE258D1D3300839173 /* three.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA8FBA1258D1D3200839173 /* three.png */; };
+		8BA8FBAF258D1D3300839173 /* pin_not_entered_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA8FBA2258D1D3200839173 /* pin_not_entered_circle.png */; };
+		8BA8FBB0258D1D3300839173 /* pin_entered_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA8FBA3258D1D3200839173 /* pin_entered_circle.png */; };
+		8BA8FBB1258D1D3300839173 /* two.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA8FBA4258D1D3200839173 /* two.png */; };
+		8BA8FBB2258D1D3300839173 /* four.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA8FBA5258D1D3300839173 /* four.png */; };
+		8BA8FBB3258D1D3300839173 /* zero.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA8FBA6258D1D3300839173 /* zero.png */; };
+		8BA8FBB4258D1D3300839173 /* nine.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA8FBA7258D1D3300839173 /* nine.png */; };
+		8BA8FBB5258D1D3300839173 /* five.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA8FBA8258D1D3300839173 /* five.png */; };
+		8BA8FBB6258D1D3300839173 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA8FBA9258D1D3300839173 /* back.png */; };
+		8BA8FBB7258D1D3300839173 /* six.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA8FBAA258D1D3300839173 /* six.png */; };
+		8BA8FBB8258D1D3300839173 /* seven.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA8FBAB258D1D3300839173 /* seven.png */; };
+		8BA8FBB9258D1D3300839173 /* eight.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA8FBAC258D1D3300839173 /* eight.png */; };
 		8BC02B4824DC6AC900F4962C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC02B4724DC6AC900F4962C /* AppDelegate.swift */; };
 		8BC02B4A24DC6AC900F4962C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC02B4924DC6AC900F4962C /* SceneDelegate.swift */; };
 		8BC02B4C24DC6AC900F4962C /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC02B4B24DC6AC900F4962C /* LoginVC.swift */; };
@@ -47,6 +62,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				8B971B95258D4908003EC3BD /* Pods_Pyrite_Financial.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -80,7 +96,21 @@
 		8B5BBCC925093090002D4C93 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8B77D0A9251B8E750069D566 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8B77D0AC251B903E0069D566 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B971B7A258D2B51003EC3BD /* PasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordVC.swift; sourceTree = "<group>"; };
 		8BA2D51B255DBABD002EDD1A /* rules.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rules.json; sourceTree = "<group>"; };
+		8BA8FBA0258D1D3200839173 /* one.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = one.png; sourceTree = "<group>"; };
+		8BA8FBA1258D1D3200839173 /* three.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = three.png; sourceTree = "<group>"; };
+		8BA8FBA2258D1D3200839173 /* pin_not_entered_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin_not_entered_circle.png; sourceTree = "<group>"; };
+		8BA8FBA3258D1D3200839173 /* pin_entered_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin_entered_circle.png; sourceTree = "<group>"; };
+		8BA8FBA4258D1D3200839173 /* two.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = two.png; sourceTree = "<group>"; };
+		8BA8FBA5258D1D3300839173 /* four.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = four.png; sourceTree = "<group>"; };
+		8BA8FBA6258D1D3300839173 /* zero.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zero.png; sourceTree = "<group>"; };
+		8BA8FBA7258D1D3300839173 /* nine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nine.png; sourceTree = "<group>"; };
+		8BA8FBA8258D1D3300839173 /* five.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = five.png; sourceTree = "<group>"; };
+		8BA8FBA9258D1D3300839173 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		8BA8FBAA258D1D3300839173 /* six.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = six.png; sourceTree = "<group>"; };
+		8BA8FBAB258D1D3300839173 /* seven.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seven.png; sourceTree = "<group>"; };
+		8BA8FBAC258D1D3300839173 /* eight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eight.png; sourceTree = "<group>"; };
 		8BC02B4424DC6AC900F4962C /* Pyrite Financial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pyrite Financial.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC02B4724DC6AC900F4962C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BC02B4924DC6AC900F4962C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,7 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E0D46DA7162E41A93F50DF4 /* Pods_Pyrite_Financial.framework in Frameworks */,
+				8B971B94258D4908003EC3BD /* Pods_Pyrite_Financial.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +160,7 @@
 				8BC02B4B24DC6AC900F4962C /* LoginVC.swift */,
 				8B5BBC9824FD88E5002D4C93 /* MessagesVC.swift */,
 				8B5BBC9624FD5975002D4C93 /* MessageVC.swift */,
+				8B971B7A258D2B51003EC3BD /* PasswordVC.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -137,6 +168,19 @@
 		8B77D0A6251113C70069D566 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8BA8FBA9258D1D3300839173 /* back.png */,
+				8BA8FBAC258D1D3300839173 /* eight.png */,
+				8BA8FBA8258D1D3300839173 /* five.png */,
+				8BA8FBA5258D1D3300839173 /* four.png */,
+				8BA8FBA7258D1D3300839173 /* nine.png */,
+				8BA8FBA0258D1D3200839173 /* one.png */,
+				8BA8FBA3258D1D3200839173 /* pin_entered_circle.png */,
+				8BA8FBA2258D1D3200839173 /* pin_not_entered_circle.png */,
+				8BA8FBAB258D1D3300839173 /* seven.png */,
+				8BA8FBAA258D1D3300839173 /* six.png */,
+				8BA8FBA1258D1D3200839173 /* three.png */,
+				8BA8FBA4258D1D3200839173 /* two.png */,
+				8BA8FBA6258D1D3300839173 /* zero.png */,
 				8B5BBCB025013289002D4C93 /* pyrite.png */,
 				8B5BBCB725013352002D4C93 /* account_balance.png */,
 				8B5BBCB625013352002D4C93 /* investments.png */,
@@ -224,7 +268,6 @@
 			buildConfigurationList = 8BC02B5824DC6ACC00F4962C /* Build configuration list for PBXNativeTarget "Pyrite Financial" */;
 			buildPhases = (
 				2F2C8B826D7FB0037523CB63 /* [CP] Check Pods Manifest.lock */,
-				BEDC8A6C25C8CC87D5A6F28A /* [CP] Prepare Artifacts */,
 				8BC02B4024DC6AC900F4962C /* Sources */,
 				8BC02B4124DC6AC900F4962C /* Frameworks */,
 				8BC02B4224DC6AC900F4962C /* Resources */,
@@ -278,20 +321,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BA8FBB8258D1D3300839173 /* seven.png in Resources */,
 				8B77D0AA251B8E750069D566 /* GoogleService-Info.plist in Resources */,
+				8BA8FBB4258D1D3300839173 /* nine.png in Resources */,
+				8BA8FBB7258D1D3300839173 /* six.png in Resources */,
+				8BA8FBB6258D1D3300839173 /* back.png in Resources */,
 				8B5BBCBF25013354002D4C93 /* logoimage.jpg in Resources */,
 				8BA2D51C255DBABE002EDD1A /* rules.json in Resources */,
+				8BA8FBB0258D1D3300839173 /* pin_entered_circle.png in Resources */,
+				8BA8FBB5258D1D3300839173 /* five.png in Resources */,
+				8BA8FBAE258D1D3300839173 /* three.png in Resources */,
 				8B5BBCC325013354002D4C93 /* send_pyrite.png in Resources */,
 				8B5BBCBD25013354002D4C93 /* purchase.png in Resources */,
 				8B5BBCC525013354002D4C93 /* message_list_icon.png in Resources */,
+				8BA8FBAD258D1D3300839173 /* one.png in Resources */,
 				8B5BBCCA25093090002D4C93 /* README.md in Resources */,
 				8B5BBCBC25013354002D4C93 /* logotxtsmall.png in Resources */,
+				8BA8FBB3258D1D3300839173 /* zero.png in Resources */,
+				8BA8FBB9258D1D3300839173 /* eight.png in Resources */,
 				8B5BBCC025013354002D4C93 /* investments.png in Resources */,
+				8BA8FBAF258D1D3300839173 /* pin_not_entered_circle.png in Resources */,
 				8BC02B5424DC6ACC00F4962C /* LaunchScreen.storyboard in Resources */,
 				8BC02B5124DC6ACC00F4962C /* Assets.xcassets in Resources */,
 				8B5BBCC225013354002D4C93 /* messages.png in Resources */,
 				8B5BBCC125013354002D4C93 /* account_balance.png in Resources */,
+				8BA8FBB2258D1D3300839173 /* four.png in Resources */,
 				8B5BBCBE25013354002D4C93 /* mortgage.png in Resources */,
+				8BA8FBB1258D1D3300839173 /* two.png in Resources */,
 				8B5BBCB125013289002D4C93 /* pyrite.png in Resources */,
 				8BC02B4F24DC6AC900F4962C /* Main.storyboard in Resources */,
 				8B5BBCC8250914E0002D4C93 /* LICENSE in Resources */,
@@ -340,23 +396,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BEDC8A6C25C8CC87D5A6F28A /* [CP] Prepare Artifacts */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Pyrite Financial/Pods-Pyrite Financial-artifacts-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Prepare Artifacts";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Pyrite Financial/Pods-Pyrite Financial-artifacts-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Pyrite Financial/Pods-Pyrite Financial-artifacts.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -375,6 +414,7 @@
 				8BC02B4824DC6AC900F4962C /* AppDelegate.swift in Sources */,
 				8BC41791252783B200036ACC /* AccountVC.swift in Sources */,
 				8B5BBC3F24FC840D002D4C93 /* VCExtension.swift in Sources */,
+				8B971B7B258D2B51003EC3BD /* PasswordVC.swift in Sources */,
 				8BC02B4A24DC6AC900F4962C /* SceneDelegate.swift in Sources */,
 				8B5BBC3D24FC7E1C002D4C93 /* PFApp.swift in Sources */,
 			);

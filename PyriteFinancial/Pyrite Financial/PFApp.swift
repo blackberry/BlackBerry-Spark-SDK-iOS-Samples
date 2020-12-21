@@ -21,6 +21,7 @@ import BlackBerrySecurity
 
 protocol PFAppState {
     func sparkSDKActive()
+    func sparkAuthRequired()
 }
 
 class PFApp {
@@ -58,7 +59,7 @@ class PFApp {
     }
     
     func initSparkSDKWith(token: String) {
-        SecurityControl.shared.provideToken(token: token.data(using: .utf8)!)
+        SecurityControl.shared.provideToken(token.data(using: .utf8)!)
         SecurityControl.shared.onStateChange = handleStateChange
         handleStateChange(newState: SecurityControl.shared.state)
     }
@@ -69,6 +70,16 @@ class PFApp {
         switch newState {
         case .tokenExpired:
             getToken()
+            break
+        case .authenticationSetupRequired:
+            if delegate != nil {
+                delegate.sparkAuthRequired()
+            }
+            break
+        case .authenticationRequired:
+            if delegate != nil {
+                delegate.sparkAuthRequired()
+            }
             break
         case .active:
             if delegate != nil {
@@ -87,7 +98,7 @@ class PFApp {
     }
     
     func checkUrl(url : String, completion: @escaping (Bool) -> Void) {
-        _ = ContentChecker.checkUrl(url: url as NSString) { (int, result) in
+        _ = ContentChecker.checkURL(url) { (int, result) in
             switch result {
             case .safe:
                 completion(true)
@@ -105,23 +116,23 @@ class PFApp {
     }
     
     func isDeviceOSRestricted() -> Bool {
-        let deviceOSThreat = ThreatStatus().getThreat(by: .deviceSoftware) as! ThreatDeviceSoftware
-        return deviceOSThreat.isDeviceOSRestricted()
+        let deviceOSThreat = ThreatStatus().threat(ofType: .deviceSoftware) as! ThreatDeviceSoftware
+        return deviceOSThreat.isDeviceOSRestricted
     }
     
     func isScreenLockEnabled() -> Bool {
-        let deviceSecurity = ThreatStatus().getThreat(by: .deviceSecurity) as! ThreatDeviceSecurity
-        return deviceSecurity.isScreenLockEnabled()
+        let deviceSecurity = ThreatStatus().threat(ofType: .deviceSecurity) as! ThreatDeviceSecurity
+        return deviceSecurity.isScreenLockEnabled
     }
     
     func isDeviceCompromised() -> Bool {
-        let deviceSecurity = ThreatStatus().getThreat(by: .deviceSecurity) as! ThreatDeviceSecurity
-        return deviceSecurity.isDeviceCompromised()
+        let deviceSecurity = ThreatStatus().threat(ofType: .deviceSecurity) as! ThreatDeviceSecurity
+        return deviceSecurity.isDeviceCompromised
     }
     
     func setMinimumOSVersion(OSVersion: String) {
         let deviceSoftwareRule = try! DeviceSoftwareRules.init(minimumOSVersion: OSVersion, enableDeviceOSCheck: true)
-        ManageRules.setDeviceSoftwareRules(rules: deviceSoftwareRule)
+        ManageRules.setDeviceSoftwareRules(deviceSoftwareRule)
     }
     
     func updateThreatStatus() {
@@ -129,15 +140,19 @@ class PFApp {
     }
     
     func getVersion() -> String {
-        return Diagnostics.getRuntimeVersion();
+        return Diagnostics.runtimeVersion;
     }
     
     func getContainerId() -> String {
-        return Diagnostics.getBlackBerryAppContainerID()
+        return Diagnostics.appContainerID
     }
     
     func getInstanceIdentifier() -> String {
-        return AppIdentity.getAppInstanceIdentifier()
+        return AppIdentity.init().appInstanceIdentifier
+    }
+    
+    func getAuthenticityID() -> String {
+        return AppIdentity().authenticityIdentifiers[.authenticity]!
     }
     
     func uploadLogs(callback: @escaping (String) -> Void) {
@@ -160,15 +175,15 @@ class PFApp {
     }
     
     func enableDataCollection() {
-        ManageRules.setDataCollectionRules(rules: DataCollectionRules.init().enableDataCollection())
+        ManageRules.setDataCollectionRules(DataCollectionRules.init().enableDataCollection())
     }
     
     func checkIfExists(fileName : String, create: Bool, initialValue: String?) -> Bool {
         let filePath = getDocumentsDirectory(fileName: fileName)
         
-        if (!BBSFileManager.default!.fileExistsAt(path: filePath)) {
+        if (!BBSFileManager.default!.fileExists(atPath: filePath)) {
             if create {
-                return BBSFileManager.default!.createFileAt(path: filePath, contents: initialValue!.data(using: .utf8), attributes: nil)
+                return BBSFileManager.default!.createFile(atPath: filePath, contents: initialValue!.data(using: .utf8), attributes: nil)
             } else {
                 return false
             }
@@ -179,17 +194,17 @@ class PFApp {
     func contentsOfFile(fileName : String) -> Data? {
         let filePath = getDocumentsDirectory(fileName: fileName)
         
-        if (!(BBSFileManager.default!.fileExistsAt(path: filePath))) {
+        if (!(BBSFileManager.default!.fileExists(atPath: filePath))) {
             return nil
         } else {
-            return BBSFileManager.default!.contentsAtPath(path: filePath)
+            return BBSFileManager.default!.contents(atPath: filePath)
         }
     }
     
     func saveInFile(fileName: String, value : String) {
         let filePath = getDocumentsDirectory(fileName: fileName)
         
-        _ = BBSFileManager.default!.createFileAt(path: filePath, contents: value.data(using: .utf8), attributes: nil)
+        _ = BBSFileManager.default!.createFile(atPath: filePath, contents: value.data(using: .utf8), attributes: nil)
     }
     
     func getDocumentsDirectory(fileName : String) -> String {

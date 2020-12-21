@@ -21,39 +21,32 @@ class Rules {
     func updateRules(newRules: Dictionary<String, AnyObject>) {
         
         if let contentCheckerRules = newRules["ContentCheckerRules"] {
-            var contectChecker = ContentCheckerRules.init()
+            let contectChecker = ManageRules.getContentCheckerRules()
             
-            if let allowedDomainUrls = contentCheckerRules["AllowedDomainURLs"] {
-                contectChecker = contectChecker.setCheckList(listType: .allowlist, listCategory: .domainURLs, checkList: allowedDomainUrls as! [String])
+            if let allowedDomainUrls = contentCheckerRules["AllowedDomainURLs"] as? [String] {
+                
+                contectChecker.allowURLs = allowedDomainUrls
             }
-            if let disallowedDomainURLs = contentCheckerRules["DisallowedDomainURLs"] {
-                contectChecker = contectChecker.setCheckList(listType: .denylist, listCategory: .domainURLs, checkList: disallowedDomainURLs as! [String])
+            if let disallowedDomainURLs = contentCheckerRules["DisallowedDomainURLs"] as? [String] {
+                contectChecker.denyURLs = disallowedDomainURLs
             }
-            if let allowedIPs = contentCheckerRules["AllowedIPs"] {
-                contectChecker = contectChecker.setCheckList(listType: .allowlist, listCategory: .ip, checkList: allowedIPs as! [String])
+            if let allowedIPs = contentCheckerRules["AllowedIPs"] as? [String] {
+                contectChecker.allowIPs = allowedIPs
             }
-            if let disallowedIPs = contentCheckerRules["DisallowedIPs"] {
-                contectChecker = contectChecker.setCheckList(listType: .denylist, listCategory: .ip, checkList: disallowedIPs as! [String])
+            if let disallowedIPs = contentCheckerRules["DisallowedIPs"] as? [String] {
+                contectChecker.denyURLs = disallowedIPs
             }
             
             if let safeBrowsing = contentCheckerRules["SafeBrowsing_CheckType"] as? String {
                 let checkType = convertStringToCheckType(input: safeBrowsing)
-                contectChecker = contectChecker.setCheckType(threatType: .safeBrowsing, checkType: checkType)
+                contectChecker.setCheckType(checkType, for: .safeBrowsing)
             }
             
             if let safeMessaging = contentCheckerRules["SafeMessaging_CheckType"] as? String {
                 let checkType = convertStringToCheckType(input: safeMessaging)
-                contectChecker = contectChecker.setCheckType(threatType: .safeMessaging, checkType: checkType)
+                contectChecker.setCheckType(checkType, for: .safeMessaging)
             }
-            if let deviceSecurity = contentCheckerRules["DeviceSecurity_CheckType"] as? String {
-                let checkType = convertStringToCheckType(input: deviceSecurity)
-                contectChecker = contectChecker.setCheckType(threatType: .deviceSecurity, checkType: checkType)
-            }
-            if let deviceSoftware = contentCheckerRules["DeviceSoftware_CheckType"] as? String {
-                let checkType = convertStringToCheckType(input: deviceSoftware)
-                contectChecker = contectChecker.setCheckType(threatType: .deviceSoftware, checkType: checkType)
-            }
-            _ = ManageRules.setContentCheckerRules(rules: contectChecker)
+            _ = ManageRules.setContentCheckerRules(contectChecker)
         }
         
         if let deviceSecurityRules = newRules["DeviceSecurityRules"] {
@@ -61,42 +54,42 @@ class Rules {
             
             if let lockScreen = deviceSecurityRules["DeviceLockScreen_Check"] as? String {
                 if lockScreen == "Enabled" {
-                    deviceSecurityRule.enableCheck(check: .deviceLockScreen)
+                    deviceSecurityRule.enableCheck(.deviceLockScreen)
                 } else {
-                    deviceSecurityRule.disableCheck(check: .deviceLockScreen)
+                    deviceSecurityRule.disableCheck(.deviceLockScreen)
                 }
             }
             
             if let debugDetection = deviceSecurityRules["DebugDetection_Check"] as? String {
                 if debugDetection == "Enabled" {
-                    deviceSecurityRule.enableCheck(check: .debugDetection)
+                    deviceSecurityRule.enableCheck(.debugDetection)
                 } else {
-                    deviceSecurityRule.disableCheck(check: .debugDetection)
+                    deviceSecurityRule.disableCheck(.debugDetection)
                 }
             }
             
             if let debugAction = deviceSecurityRules["DebugDetection_EnforcementAction"] as? String {
                 let action = convertStringToAction(input: debugAction)
-                deviceSecurityRule.setEnforcementAction(check: .debugDetection, action: action)
+                deviceSecurityRule.setEnforcementAction(action, for: .debugDetection)
             }
             
             if let jaibreakDetection = deviceSecurityRules["JailbreakDetection_Check"] as? String {
                 if jaibreakDetection == "Enabled" {
-                    deviceSecurityRule.enableCheck(check: .jailbreakDetection)
+                    deviceSecurityRule.enableCheck(.jailbreakDetection)
                 } else {
-                    deviceSecurityRule.disableCheck(check: .jailbreakDetection)
+                    deviceSecurityRule.disableCheck(.jailbreakDetection)
                 }
             }
             
             if let hookDetection = deviceSecurityRules["HookDetection_Check"] as? String {
                 if hookDetection == "Enabled" {
-                    deviceSecurityRule.enableCheck(check: .hookDetection)
+                    deviceSecurityRule.enableCheck(.hookDetection)
                 } else {
-                    deviceSecurityRule.disableCheck(check: .hookDetection)
+                    deviceSecurityRule.disableCheck(.hookDetection)
                 }
             }
             
-            ManageRules.setDeviceSecurityRules(rules: deviceSecurityRule)
+            ManageRules.setDeviceSecurityRules(deviceSecurityRule)
         }
         
         if let deviceSoftwareRules = newRules["iOSDeviceSoftwareRules"] {
@@ -111,10 +104,10 @@ class Rules {
             }
             
             if let minimumOSVersion = deviceSoftwareRules["MinimumOSVersion"] as? String {
-                deviceSoftwareRule = try! deviceSoftwareRule.setMinimumOSVersion(version: minimumOSVersion)
+                deviceSoftwareRule = try! deviceSoftwareRule.setMinimumOSVersion(minimumOSVersion)
             }
             
-            ManageRules.setDeviceSoftwareRules(rules: deviceSoftwareRule)
+            ManageRules.setDeviceSoftwareRules(deviceSoftwareRule)
         }
         
         if let deviceCollectionRules = newRules["DataCollectionRules"] {
@@ -130,15 +123,72 @@ class Rules {
             
             if let uploadType = deviceCollectionRules["UploadType"] as? String {
                 let upload = convertStringToUploadType(input: uploadType)
-                dataCollectionRule.setUploadType(uploadType: upload)
+                dataCollectionRule.setUploadType(upload)
             }
             
             if let uploadLimit = deviceCollectionRules["UploadMonthlyLimit"] as? String {
                 let upload = convertStringToUploadLimit(input: uploadLimit)
-                dataCollectionRule.setUploadMonthlyLimit(uploadMonthlyLimit: upload)
+                dataCollectionRule.setUploadMonthlyLimit(upload)
             }
             
-            ManageRules.setDataCollectionRules(rules: dataCollectionRule)
+            ManageRules.setDataCollectionRules(dataCollectionRule)
+        }
+        
+        if let deviceOfflineRules = newRules["DeviceOfflineRules"] {
+            let deviceOffilenRule = DeviceOfflineRules.init()
+
+            if let minutesToMedium = deviceOfflineRules["MinutesToMedium"] as? String  {
+                deviceOffilenRule.minutesToMediumRule = Int(minutesToMedium)!
+            }
+
+            if let minutesToHigh = deviceOfflineRules["MinutesToHigh"] as? String  {
+                deviceOffilenRule.minutesToHighRule = Int(minutesToHigh)!
+            }
+
+            ManageRules.setDeviceOfflineRules(deviceOffilenRule)
+        }
+        
+        if let features = newRules["Features"] {
+            
+            if let deviceSecurity = features["DeviceSecurity_Enabled"] as? String {
+                if (deviceSecurity == "ENABLED") {
+                    _ = ManageFeatures.enableFeature(.deviceSecurity)
+                } else {
+                    _ = ManageFeatures.disableFeature(.deviceSecurity)
+                }
+            }
+            
+            if let deviceSoftware = features["DeviceSoftware_Enabled"] as? String {
+                if (deviceSoftware == "ENABLED") {
+                    _ = ManageFeatures.enableFeature(.deviceSoftware)
+                } else {
+                    _ = ManageFeatures.disableFeature(.deviceSoftware)
+                }
+            }
+            
+            if let safeBrowsing = features["SafeBrowsing_Enabled"] as? String {
+                if (safeBrowsing == "ENABLED") {
+                    _ = ManageFeatures.enableFeature(.safeBrowsing)
+                } else {
+                    _ = ManageFeatures.disableFeature(.safeBrowsing)
+                }
+            }
+            
+            if let safeMessaging = features["SafeMessaging_Enabled"] as? String {
+                if (safeMessaging == "ENABLED") {
+                    _ = ManageFeatures.enableFeature(.safeMessaging)
+                } else {
+                    _ = ManageFeatures.disableFeature(.safeMessaging)
+                }
+            }
+            
+            if let deviceOffline = features["DeviceOffline_Enabled"] as? String {
+                if (deviceOffline == "ENABLED") {
+                    _ = ManageFeatures.enableFeature(.deviceOffline)
+                } else {
+                    _ = ManageFeatures.disableFeature(.deviceOffline)
+                }
+            }
         }
     }
     

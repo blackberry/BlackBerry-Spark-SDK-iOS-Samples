@@ -29,7 +29,9 @@ class SettingsVC: UIViewController {
     }
     
     @IBAction func getNewRules(_ sender: Any) {
-        var request = URLRequest(url: URL(string: "https://raw.githubusercontent.com/gghangura/rules/master/rules.json")!)
+        let gitHuburl = "https://raw.githubusercontent.com/gghangura/rules/master/rules.json"
+        let url = "http://localhost:3000/rules?appAuthenticityID=" + PFApp.shared.getAuthenticityID() + "&appInstanceID=" + PFApp.shared.getInstanceIdentifier()
+        var request = URLRequest(url: URL(string: gitHuburl)!)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 

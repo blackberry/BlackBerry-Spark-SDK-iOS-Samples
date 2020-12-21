@@ -50,8 +50,9 @@ class LoginVC: UIViewController {
                 self.showAlert(title: "Alert!", message: "Values are incorrect") {}
             } else {
                 authResult?.user.getIDToken(completion: { (token, error) in
-                    PFApp.shared.initSparkSDKWith(token: token!)
-                    self.dismiss(animated: true, completion: nil)
+                    self.dismiss(animated: true, completion: {
+                        PFApp.shared.initSparkSDKWith(token: token!)
+                    })
                 })
             }
         }

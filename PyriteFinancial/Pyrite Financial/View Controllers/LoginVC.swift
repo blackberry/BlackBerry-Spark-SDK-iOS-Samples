@@ -51,7 +51,7 @@ class LoginVC: UIViewController {
             } else {
                 authResult?.user.getIDToken(completion: { (token, error) in
                     self.dismiss(animated: true, completion: {
-                        PFApp.shared.initSparkSDKWith(token: token!)
+                        PFApp.shared.provideToken(token: token!)
                     })
                 })
             }

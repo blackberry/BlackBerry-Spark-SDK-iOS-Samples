@@ -21,11 +21,18 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var sdkVersionLabel: UILabel!
     @IBOutlet weak var uploadStatus: UILabel!
     @IBOutlet weak var instanceIdentifierLabel: UILabel!
+    @IBOutlet weak var switchOutlet: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         sdkVersionLabel.text = PFApp.shared.getVersion()
         instanceIdentifierLabel.text = PFApp.shared.getInstanceIdentifier()
+        switchOutlet.setOn(PFApp.shared.isBiometricsSetup(), animated: false)
+        switchOutlet.isEnabled = PFApp.shared.isBiometricsAvailable()
+    }
+    
+    @IBAction func switchAction(_ sender: Any) {
+        PFApp.shared.biometricPreference(enable: switchOutlet.isOn)
     }
     
     @IBAction func getNewRules(_ sender: Any) {

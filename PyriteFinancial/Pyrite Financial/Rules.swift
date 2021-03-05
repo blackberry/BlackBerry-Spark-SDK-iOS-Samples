@@ -24,7 +24,6 @@ class Rules {
             let contectChecker = ManageRules.getContentCheckerRules()
             
             if let allowedDomainUrls = contentCheckerRules["AllowedDomainURLs"] as? [String] {
-                
                 contectChecker.allowURLs = allowedDomainUrls
             }
             if let disallowedDomainURLs = contentCheckerRules["DisallowedDomainURLs"] as? [String] {
@@ -70,7 +69,7 @@ class Rules {
             
             if let debugAction = deviceSecurityRules["DebugDetection_EnforcementAction"] as? String {
                 let action = convertStringToAction(input: debugAction)
-                deviceSecurityRule.setEnforcementAction(action, for: .debugDetection)
+                try? deviceSecurityRule.setEnforcementAction(action, for: .debugDetection)
             }
             
             if let jaibreakDetection = deviceSecurityRules["JailbreakDetection_Check"] as? String {
@@ -89,7 +88,7 @@ class Rules {
                 }
             }
             
-            ManageRules.setDeviceSecurityRules(deviceSecurityRule)
+            _ = ManageRules.setDeviceSecurityRules(deviceSecurityRule)
         }
         
         if let deviceSoftwareRules = newRules["iOSDeviceSoftwareRules"] {
@@ -107,7 +106,7 @@ class Rules {
                 deviceSoftwareRule = try! deviceSoftwareRule.setMinimumOSVersion(minimumOSVersion)
             }
             
-            ManageRules.setDeviceSoftwareRules(deviceSoftwareRule)
+            _ = ManageRules.setDeviceSoftwareRules(deviceSoftwareRule)
         }
         
         if let deviceCollectionRules = newRules["DataCollectionRules"] {
@@ -131,21 +130,22 @@ class Rules {
                 dataCollectionRule.setUploadMonthlyLimit(upload)
             }
             
-            ManageRules.setDataCollectionRules(dataCollectionRule)
+            _ = ManageRules.setDataCollectionRules(dataCollectionRule)
         }
         
         if let deviceOfflineRules = newRules["DeviceOfflineRules"] {
-            let deviceOffilenRule = DeviceOfflineRules.init()
+            let deviceOfflineRule = DeviceOfflineRules.init()
+            
 
             if let minutesToMedium = deviceOfflineRules["MinutesToMedium"] as? String  {
-                deviceOffilenRule.minutesToMediumRule = Int(minutesToMedium)!
+                try? deviceOfflineRule.setMinutesToMediumThreatLevel(Int(minutesToMedium)!)
             }
 
             if let minutesToHigh = deviceOfflineRules["MinutesToHigh"] as? String  {
-                deviceOffilenRule.minutesToHighRule = Int(minutesToHigh)!
+                try? deviceOfflineRule.setMinutesToHighThreatLevel(Int(minutesToHigh)!)
             }
 
-            ManageRules.setDeviceOfflineRules(deviceOffilenRule)
+            _ = ManageRules.setDeviceOfflineRules(deviceOfflineRule)
         }
         
         if let features = newRules["Features"] {

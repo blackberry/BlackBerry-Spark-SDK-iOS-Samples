@@ -149,7 +149,14 @@ class PasswordVC: UIViewController {
             if SecurityControl.shared.state == .authenticationSetupRequired {
                 let result = AppAuthentication.shared.setPassword(passcode)
                 if result {
-                    self.dismiss(animated: true, completion: nil)
+                    if PFApp.shared.isBiometricsAvailable() {
+                        self.showAlertWithCancel(title: "Biometric", message: "Do you want to use Biometric to unlock the app?", confirm: "Yes", dismiss: "No") { (confirmed) in
+                            PFApp.shared.biometricPreference(enable: confirmed)
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    } else {
+                        self.dismiss(animated: true, completion: nil)
+                    }
                 } else {
                     passcode = ""
                     updateDots()

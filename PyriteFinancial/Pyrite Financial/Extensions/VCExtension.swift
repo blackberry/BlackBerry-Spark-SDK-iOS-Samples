@@ -21,15 +21,29 @@ var vSpinner : UIView?
 
 extension UIViewController {
 
-  func showAlert(title: String, message: String, callback: @escaping () -> ()) {
-    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: {
-       alertAction in
-       callback()
-     }))
+    func showAlert(title: String, message: String, callback: @escaping () -> ()) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: {
+           alertAction in
+           callback()
+         }))
 
-     self.present(alert, animated: true, completion: nil)
-   }
+         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showAlertWithCancel(title: String, message: String, confirm: String, dismiss: String, callback: @escaping (Bool) -> ()) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+         alert.addAction(UIAlertAction(title: confirm, style: .default, handler: {
+           alertAction in
+           callback(true)
+         }))
+        alert.addAction(UIAlertAction(title: dismiss, style: .default, handler: {
+          alertAction in
+          callback(false)
+        }))
+
+         self.present(alert, animated: true, completion: nil)
+    }
     
     func showSpinner(onView : UIView) {
         let spinnerView = UIView.init(frame: onView.bounds)

@@ -75,6 +75,7 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         PFApp.shared.delegate = self
+        PFApp.shared.listenToStateChanges()
         if PFApp.shared.alreadySignedIn() {
             self.showSpinner(onView: self.view)
             if SecurityControl.shared.state != .active {
@@ -100,14 +101,7 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     func startApp() {
         self.showThreatStatus()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        if !PFApp.shared.alreadySignedIn() {
-            let loginVC = self.storyboard?.instantiateViewController(identifier: "LoginVC")
-            loginVC!.isModalInPresentation = true
-            self.present(loginVC!, animated: true, completion: nil)
-        }
-    }
+
     
     @IBAction func settingsButton(_ sender: Any) {
         let settingVC = self.storyboard?.instantiateViewController(identifier: "settingVC")
@@ -132,6 +126,18 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         let passwordVC = self.storyboard?.instantiateViewController(identifier: "PasswordVC")
         passwordVC!.isModalInPresentation = true
         self.present(passwordVC!, animated: true, completion: nil)
+    }
+    
+    func loginRequired() {
+        let loginVC = self.storyboard?.instantiateViewController(identifier: "LoginVC")
+        loginVC!.isModalInPresentation = true
+        self.present(loginVC!, animated: true, completion: nil)
+    }
+    
+    func promptBiometricPreference() {
+        self.showAlertWithCancel(title: "Biometric", message: "Do you want to use Biometric to unlock the app?", confirm: "Yes", dismiss: "No") { (confirmed) in
+            PFApp.shared.biometricPreference(enable: confirmed)
+        }
     }
     
 }

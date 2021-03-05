@@ -22,6 +22,8 @@ import BlackBerrySecurity
 protocol PFAppState {
     func sparkSDKActive()
     func sparkAuthRequired()
+    func loginRequired()
+    func promptBiometricPreference()
 }
 
 class PFApp {
@@ -53,15 +55,38 @@ class PFApp {
             if error !=  nil {
                 print("error getting token")
             } else {
-                self.initSparkSDKWith(token: token!)
+                self.provideToken(token: token!)
             }
         }
     }
     
-    func initSparkSDKWith(token: String) {
-        SecurityControl.shared.provideToken(token.data(using: .utf8)!)
+    func listenToStateChanges() {
         SecurityControl.shared.onStateChange = handleStateChange
         handleStateChange(newState: SecurityControl.shared.state)
+    }
+    
+    func provideToken(token: String) {
+        SecurityControl.shared.provideToken(token.data(using: .utf8)!)
+    }
+    
+    func biometricPreference(enable: Bool) {
+        setUserBiometricSetting(value: enable)
+        if enable {
+            _ = AppAuthentication.shared.setupBiometrics()
+        } else {
+            _ = AppAuthentication.shared.disableBiometrics()
+        }
+        checkLogin()
+    }
+    
+    func checkLogin() {
+        if alreadySignedIn() {
+            getToken()
+        } else {
+            if delegate != nil {
+                delegate.loginRequired()
+            }
+        }
     }
     
     //This method listens to the state changes of the Spark SDK and when the token expires, gets a new token from Firebase Auth and provies it to the SDK.
@@ -77,9 +102,24 @@ class PFApp {
             }
             break
         case .authenticationRequired:
-            if delegate != nil {
-                delegate.sparkAuthRequired()
+            if AppAuthentication.shared.isBiometricsAvailable() && AppAuthentication.shared.isBiometricsSetup() {
+                AppAuthentication.shared.promptBiometrics("Unlock App") { (unlocked, err) in
+                    if unlocked {
+                        self.checkLogin()
+                    } else {
+                        if self.delegate != nil {
+                            self.delegate.sparkAuthRequired()
+                        }
+                    }
+                }
+            } else {
+                if delegate != nil {
+                    delegate.sparkAuthRequired()
+                }
             }
+            break
+        case .registration:
+            checkLogin()
             break
         case .active:
             if delegate != nil {
@@ -130,11 +170,6 @@ class PFApp {
         return deviceSecurity.isDeviceCompromised
     }
     
-    func setMinimumOSVersion(OSVersion: String) {
-        let deviceSoftwareRule = try! DeviceSoftwareRules.init(minimumOSVersion: OSVersion, enableDeviceOSCheck: true)
-        ManageRules.setDeviceSoftwareRules(deviceSoftwareRule)
-    }
-    
     func updateThreatStatus() {
         DeviceChecker.checkDeviceSecurity()
     }
@@ -175,7 +210,7 @@ class PFApp {
     }
     
     func enableDataCollection() {
-        ManageRules.setDataCollectionRules(DataCollectionRules.init().enableDataCollection())
+        _ = ManageRules.setDataCollectionRules(DataCollectionRules.init().enableDataCollection())
     }
     
     func checkIfExists(fileName : String, create: Bool, initialValue: String?) -> Bool {
@@ -211,5 +246,21 @@ class PFApp {
         let paths = FileManager.default.urls(for: .applicationDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
         return documentsDirectory.path + fileName
+    }
+    
+    func isBiometricsAvailable() -> Bool {
+        return AppAuthentication.shared.isBiometricsAvailable()
+    }
+    
+    func isBiometricsSetup() -> Bool {
+        return AppAuthentication.shared.isBiometricsSetup()
+    }
+    
+    func getUserBiometricSetting() -> Bool {
+        return UserDefaults.standard.bool(forKey: "biometricSetting")
+    }
+    
+    func setUserBiometricSetting(value: Bool) {
+        UserDefaults.standard.set(value, forKey: "biometricSetting")
     }
 }

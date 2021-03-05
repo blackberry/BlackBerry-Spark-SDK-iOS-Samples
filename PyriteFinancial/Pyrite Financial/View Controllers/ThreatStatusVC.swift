@@ -53,7 +53,15 @@ class ThreatStatusVC: UIViewController {
     }
     
     @IBAction func dismissVC(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        if PFApp.shared.isDeviceCompromised() {
+            self.showAlertWithCancel(title: "Alert!", message: "The device is comprised. Are you sure you want to continue?", confirm: "Yes", dismiss: "No") { (confirmed) in
+                if confirmed {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func refreshStatus(_ sender: Any) {

@@ -548,7 +548,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BlackBerry Spark SDK Version" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0W-76-vrh">
-                                <rect key="frame" x="16" y="322.5" width="229.5" height="60"/>
+                                <rect key="frame" x="16" y="383.5" width="229.5" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="196" id="DV8-dD-PTE"/>
                                 </constraints>
@@ -563,39 +563,59 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eI-80-V3A">
-                                <rect key="frame" x="271.5" y="322.5" width="87.5" height="60"/>
+                                <rect key="frame" x="271.5" y="383.5" width="87.5" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BJG-Ln-Nsj">
-                                <rect key="frame" x="114" y="505.5" width="147" height="30"/>
+                                <rect key="frame" x="114" y="566.5" width="147" height="30"/>
                                 <state key="normal" title="Display Threat Status"/>
                                 <connections>
                                     <action selector="displayThreatStatus:" destination="OWA-nC-14U" eventType="touchUpInside" id="sUJ-o4-rY9"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BlackBerry Spark SDK Instance Identifier" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJK-ur-If6">
-                                <rect key="frame" x="16" y="406" width="229.5" height="41"/>
+                                <rect key="frame" x="16" y="467" width="229.5" height="41"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyt-yR-MMu">
-                                <rect key="frame" x="271.5" y="406" width="87.5" height="41"/>
+                                <rect key="frame" x="271.5" y="467" width="87.5" height="41"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMg-bj-pMT">
-                                <rect key="frame" x="138" y="476" width="99" height="30"/>
+                                <rect key="frame" x="138" y="537" width="99" height="30"/>
                                 <state key="normal" title="Get new Rules"/>
                                 <connections>
                                     <action selector="getNewRules:" destination="OWA-nC-14U" eventType="touchUpInside" id="WCn-sl-qXJ"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fRd-jz-RuD">
+                                <rect key="frame" x="292" y="325.5" width="49" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="47" id="GtF-no-N7a"/>
+                                    <constraint firstAttribute="height" constant="31" id="UIr-Cg-OPj"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="switchAction:" destination="OWA-nC-14U" eventType="valueChanged" id="9J8-0s-umB"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Biometric" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmi-dY-D4S">
+                                <rect key="frame" x="16" y="311" width="196" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="8zV-IF-agN"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="196" id="czR-CM-J3a"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="60m-RN-vrW"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -607,13 +627,15 @@
                             <constraint firstItem="BJG-Ln-Nsj" firstAttribute="centerX" secondItem="60m-RN-vrW" secondAttribute="centerX" id="6Gu-JS-1dd"/>
                             <constraint firstItem="GJK-ur-If6" firstAttribute="leading" secondItem="O0W-76-vrh" secondAttribute="leading" id="AUW-wo-GmL"/>
                             <constraint firstItem="cyt-yR-MMu" firstAttribute="top" secondItem="4eI-80-V3A" secondAttribute="bottom" constant="23.5" id="Acs-D9-j07"/>
+                            <constraint firstItem="xmi-dY-D4S" firstAttribute="top" secondItem="uCn-hD-nmf" secondAttribute="bottom" constant="7.5" id="CUy-jo-fAN"/>
                             <constraint firstItem="RFr-fv-P5v" firstAttribute="top" secondItem="60m-RN-vrW" secondAttribute="top" constant="20" id="EQ4-U1-HEK"/>
                             <constraint firstItem="RFr-fv-P5v" firstAttribute="leading" secondItem="60m-RN-vrW" secondAttribute="leading" constant="66" id="I7d-2A-t7N"/>
                             <constraint firstItem="O0W-76-vrh" firstAttribute="leading" secondItem="60m-RN-vrW" secondAttribute="leading" constant="16" id="NBB-gu-kaM"/>
                             <constraint firstItem="uCn-hD-nmf" firstAttribute="centerX" secondItem="60m-RN-vrW" secondAttribute="centerX" id="NVi-5q-eSP"/>
                             <constraint firstItem="GJK-ur-If6" firstAttribute="height" secondItem="O0W-76-vrh" secondAttribute="height" multiplier="0.682927" id="QJa-JS-U5c"/>
-                            <constraint firstItem="O0W-76-vrh" firstAttribute="top" secondItem="uCn-hD-nmf" secondAttribute="bottom" constant="19" id="Shn-PY-h4D"/>
+                            <constraint firstItem="O0W-76-vrh" firstAttribute="top" secondItem="uCn-hD-nmf" secondAttribute="bottom" constant="80" id="Shn-PY-h4D"/>
                             <constraint firstItem="6U2-5L-z6E" firstAttribute="top" secondItem="RFr-fv-P5v" secondAttribute="bottom" constant="7" id="T9e-H1-IJd"/>
+                            <constraint firstItem="fRd-jz-RuD" firstAttribute="centerY" secondItem="xmi-dY-D4S" secondAttribute="centerY" id="Tgg-uV-F6O"/>
                             <constraint firstItem="BJG-Ln-Nsj" firstAttribute="top" secondItem="O0W-76-vrh" secondAttribute="bottom" constant="123" id="Tsl-Km-inY"/>
                             <constraint firstItem="60m-RN-vrW" firstAttribute="trailing" secondItem="4eI-80-V3A" secondAttribute="trailing" constant="16" id="Ws7-SQ-9wU"/>
                             <constraint firstItem="4eI-80-V3A" firstAttribute="top" secondItem="O0W-76-vrh" secondAttribute="top" id="Xzy-dA-zt7"/>
@@ -626,14 +648,17 @@
                             <constraint firstItem="4eI-80-V3A" firstAttribute="bottom" secondItem="O0W-76-vrh" secondAttribute="bottom" id="mi8-US-bgn"/>
                             <constraint firstItem="6U2-5L-z6E" firstAttribute="leading" secondItem="60m-RN-vrW" secondAttribute="leading" constant="16" id="n5v-Cm-IZi"/>
                             <constraint firstItem="60m-RN-vrW" firstAttribute="trailing" secondItem="RFr-fv-P5v" secondAttribute="trailing" constant="65" id="oss-8m-P8x"/>
+                            <constraint firstItem="xmi-dY-D4S" firstAttribute="leading" secondItem="60m-RN-vrW" secondAttribute="leading" constant="16" id="pgo-2h-yB0"/>
                             <constraint firstItem="cyt-yR-MMu" firstAttribute="height" secondItem="4eI-80-V3A" secondAttribute="height" multiplier="0.682927" id="tRT-Gl-3uV"/>
                             <constraint firstItem="pMg-bj-pMT" firstAttribute="top" secondItem="GJK-ur-If6" secondAttribute="bottom" constant="29" id="vGP-bS-Jpv"/>
+                            <constraint firstItem="fRd-jz-RuD" firstAttribute="centerX" secondItem="4eI-80-V3A" secondAttribute="centerX" id="wEG-Fs-1W0"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="instanceIdentifierLabel" destination="cyt-yR-MMu" id="sD8-tt-Xh5"/>
                         <outlet property="sdkVersionLabel" destination="4eI-80-V3A" id="Sxl-yR-kvn"/>
+                        <outlet property="switchOutlet" destination="fRd-jz-RuD" id="lzV-Dn-n4G"/>
                         <outlet property="uploadStatus" destination="RRS-Bq-DkQ" id="iK8-sT-yJI"/>
                     </connections>
                 </viewController>
@@ -791,6 +816,7 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="9A4-bl-N4A" firstAttribute="top" secondItem="AHh-4N-f5t" secondAttribute="top" id="2RC-D6-fIO"/>
                                     <constraint firstItem="9A4-bl-N4A" firstAttribute="leading" secondItem="AHh-4N-f5t" secondAttribute="leading" id="AFH-ZY-rYT"/>
@@ -933,12 +959,12 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a new PIN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g91-83-N5U">
                                 <rect key="frame" x="95" y="35" width="186" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="caC-2x-0jG"/>
-                        <color key="backgroundColor" systemColor="labelColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="caC-2x-0jG" firstAttribute="trailing" secondItem="g91-83-N5U" secondAttribute="trailing" constant="94" id="0h6-OV-jfd"/>
                             <constraint firstItem="Iaj-m7-j4M" firstAttribute="top" secondItem="AHh-4N-f5t" secondAttribute="top" constant="74" id="BOW-1C-opK"/>
@@ -993,9 +1019,6 @@
         <image name="three.png" width="19.200000762939453" height="19.200000762939453"/>
         <image name="two.png" width="19.200000762939453" height="19.200000762939453"/>
         <image name="zero.png" width="19.200000762939453" height="19.200000762939453"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -52,7 +52,7 @@ class Rules {
             let deviceSecurityRule = DeviceSecurityRules.init()
             
             if let lockScreen = deviceSecurityRules["DeviceLockScreen_Check"] as? String {
-                if lockScreen == "Enabled" {
+                if lockScreen.lowercased() == "enabled" {
                     deviceSecurityRule.enableCheck(.deviceLockScreen)
                 } else {
                     deviceSecurityRule.disableCheck(.deviceLockScreen)
@@ -60,7 +60,7 @@ class Rules {
             }
             
             if let debugDetection = deviceSecurityRules["DebugDetection_Check"] as? String {
-                if debugDetection == "Enabled" {
+                if debugDetection.lowercased() == "enabled" {
                     deviceSecurityRule.enableCheck(.debugDetection)
                 } else {
                     deviceSecurityRule.disableCheck(.debugDetection)
@@ -69,11 +69,11 @@ class Rules {
             
             if let debugAction = deviceSecurityRules["DebugDetection_EnforcementAction"] as? String {
                 let action = convertStringToAction(input: debugAction)
-                try? deviceSecurityRule.setEnforcementAction(action, for: .debugDetection)
+                try! deviceSecurityRule.setEnforcementAction(action, for: .debugDetection)
             }
             
             if let jaibreakDetection = deviceSecurityRules["JailbreakDetection_Check"] as? String {
-                if jaibreakDetection == "Enabled" {
+                if jaibreakDetection.lowercased() == "enabled" {
                     deviceSecurityRule.enableCheck(.jailbreakDetection)
                 } else {
                     deviceSecurityRule.disableCheck(.jailbreakDetection)
@@ -81,7 +81,7 @@ class Rules {
             }
             
             if let hookDetection = deviceSecurityRules["HookDetection_Check"] as? String {
-                if hookDetection == "Enabled" {
+                if hookDetection.lowercased() == "enabled" {
                     deviceSecurityRule.enableCheck(.hookDetection)
                 } else {
                     deviceSecurityRule.disableCheck(.hookDetection)
@@ -95,7 +95,7 @@ class Rules {
             var deviceSoftwareRule = DeviceSoftwareRules.init()
             
             if let deviceOSCheck = deviceSoftwareRules["DeviceOSSoftware_Check"] as? String {
-                if deviceOSCheck == "Enabled" {
+                if deviceOSCheck.lowercased() == "enabled" {
                     deviceSoftwareRule.enableDeviceOSCheck()
                 } else {
                     deviceSoftwareRule.disableDeviceOSCheck()
@@ -113,7 +113,7 @@ class Rules {
             let dataCollectionRule = DataCollectionRules.init()
             
             if let dataCollectionEnabled = deviceCollectionRules["DataCollectionEnabled"] as? String {
-                if dataCollectionEnabled == "Enabled" {
+                if dataCollectionEnabled.lowercased() == "enabled" {
                     dataCollectionRule.enableDataCollection()
                 } else {
                     dataCollectionRule.disableDataCollection()
@@ -134,24 +134,16 @@ class Rules {
         }
         
         if let deviceOfflineRules = newRules["DeviceOfflineRules"] {
-            let deviceOfflineRule = DeviceOfflineRules.init()
-            
-
-            if let minutesToMedium = deviceOfflineRules["MinutesToMedium"] as? String  {
-                try? deviceOfflineRule.setMinutesToMediumThreatLevel(Int(minutesToMedium)!)
+            if let minutesToMedium = deviceOfflineRules["MinutesToMedium"] as? String, let minutesToHigh = deviceOfflineRules["MinutesToHigh"] as? String {
+                let deviceOfflineRule = try! DeviceOfflineRules.init(minutesToMediumThreatLevel: Int(minutesToMedium)!, minutesToHighThreatLevel: Int(minutesToHigh)!)
+                _ = ManageRules.setDeviceOfflineRules(deviceOfflineRule)
             }
-
-            if let minutesToHigh = deviceOfflineRules["MinutesToHigh"] as? String  {
-                try? deviceOfflineRule.setMinutesToHighThreatLevel(Int(minutesToHigh)!)
-            }
-
-            _ = ManageRules.setDeviceOfflineRules(deviceOfflineRule)
         }
         
         if let features = newRules["Features"] {
             
             if let deviceSecurity = features["DeviceSecurity_Enabled"] as? String {
-                if (deviceSecurity == "ENABLED") {
+                if (deviceSecurity.lowercased() == "enabled") {
                     _ = ManageFeatures.enableFeature(.deviceSecurity)
                 } else {
                     _ = ManageFeatures.disableFeature(.deviceSecurity)
@@ -159,7 +151,7 @@ class Rules {
             }
             
             if let deviceSoftware = features["DeviceSoftware_Enabled"] as? String {
-                if (deviceSoftware == "ENABLED") {
+                if (deviceSoftware.lowercased() == "enabled") {
                     _ = ManageFeatures.enableFeature(.deviceSoftware)
                 } else {
                     _ = ManageFeatures.disableFeature(.deviceSoftware)
@@ -167,7 +159,7 @@ class Rules {
             }
             
             if let safeBrowsing = features["SafeBrowsing_Enabled"] as? String {
-                if (safeBrowsing == "ENABLED") {
+                if (safeBrowsing.lowercased() == "enabled") {
                     _ = ManageFeatures.enableFeature(.safeBrowsing)
                 } else {
                     _ = ManageFeatures.disableFeature(.safeBrowsing)
@@ -175,7 +167,7 @@ class Rules {
             }
             
             if let safeMessaging = features["SafeMessaging_Enabled"] as? String {
-                if (safeMessaging == "ENABLED") {
+                if (safeMessaging.lowercased() == "enabled") {
                     _ = ManageFeatures.enableFeature(.safeMessaging)
                 } else {
                     _ = ManageFeatures.disableFeature(.safeMessaging)
@@ -183,7 +175,7 @@ class Rules {
             }
             
             if let deviceOffline = features["DeviceOffline_Enabled"] as? String {
-                if (deviceOffline == "ENABLED") {
+                if (deviceOffline.lowercased() == "enabled") {
                     _ = ManageFeatures.enableFeature(.deviceOffline)
                 } else {
                     _ = ManageFeatures.disableFeature(.deviceOffline)

@@ -21,8 +21,8 @@ import BlackBerrySecurity
 
 protocol PFAppState {
     func sparkSDKActive()
-    func sparkAuthRequired()
-    func loginRequired()
+    func sparkAuthRequired(biometricsInvalidated: Bool)
+    func loginRequired(error: String?)
     func promptBiometricPreference()
 }
 
@@ -35,6 +35,8 @@ class PFApp {
     private var currentUser : User!
     
     var delegate: PFAppState!
+    
+    var showingThreatStatus: Bool = false
     
     func alreadySignedIn() -> Bool {
         if let currentUser = Auth.auth().currentUser {
@@ -84,7 +86,7 @@ class PFApp {
             getToken()
         } else {
             if delegate != nil {
-                delegate.loginRequired()
+                delegate.loginRequired(error: nil)
             }
         }
     }
@@ -98,7 +100,7 @@ class PFApp {
             break
         case .authenticationSetupRequired:
             if delegate != nil {
-                delegate.sparkAuthRequired()
+                delegate.sparkAuthRequired(biometricsInvalidated: false)
             }
             break
         case .authenticationRequired:
@@ -106,15 +108,24 @@ class PFApp {
                 AppAuthentication.shared.promptBiometrics("Unlock App") { (unlocked, err) in
                     if unlocked {
                         self.checkLogin()
-                    } else {
-                        if self.delegate != nil {
-                            self.delegate.sparkAuthRequired()
+                    }
+                    if let error = err {
+                        switch (error as NSError).code {
+                        case BiometricAuthenticationErrorCode.invalidated.rawValue:
+                            if self.delegate != nil {
+                                self.delegate.sparkAuthRequired(biometricsInvalidated: true)
+                            }
+                            break
+                        default:
+                            if self.delegate != nil {
+                                self.delegate.sparkAuthRequired(biometricsInvalidated: false)
+                            }
                         }
                     }
                 }
             } else {
                 if delegate != nil {
-                    delegate.sparkAuthRequired()
+                    delegate.sparkAuthRequired(biometricsInvalidated: false)
                 }
             }
             break
@@ -127,14 +138,24 @@ class PFApp {
             }
             NotificationCenter.default.addObserver(self, selector: #selector(threatStatusChanged), name: ThreatStatus.threatStatusChangedNotification, object: nil)
             break
+        case .error:
+            if delegate != nil {
+                delegate.loginRequired(error: "An error occurred initializing BlackBerry Security.")
+            }
         default:
             break
         }
     }
     
+    func currentInitializationState() -> SecurityControl.InitializationState {
+        return SecurityControl.shared.state
+    }
+    
     @objc func threatStatusChanged(notification: NSNotification) {
-        let threatStatusVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "ThreatStatusVC")
-        UIApplication.shared.windows.last?.rootViewController?.present(threatStatusVC, animated: true, completion: nil)
+        if !showingThreatStatus {
+            let threatStatusVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(identifier: "ThreatStatusVC")
+            UIApplication.shared.windows.last?.rootViewController?.present(threatStatusVC, animated: true, completion: nil)
+        }
     }
     
     func checkUrl(url : String, completion: @escaping (Bool) -> Void) {

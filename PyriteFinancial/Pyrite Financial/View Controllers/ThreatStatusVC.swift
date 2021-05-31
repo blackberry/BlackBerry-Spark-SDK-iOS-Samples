@@ -29,6 +29,8 @@ class ThreatStatusVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        PFApp.shared.showingThreatStatus = true
+        
         if !self.isBeingPresented {
             self.dismissButton.isHidden = true
         }
@@ -38,7 +40,11 @@ class ThreatStatusVC: UIViewController {
         
     }
     
-    @objc func threatStatusChanged(notification: NSNotification) {
+    override func viewDidDisappear(_ animated: Bool) {
+        PFApp.shared.showingThreatStatus = false
+    }
+    
+    @objc func threatStatusChanged() {
         updateLabels()
     }
     
@@ -47,9 +53,9 @@ class ThreatStatusVC: UIViewController {
         let screenLock = PFApp.shared.isScreenLockEnabled()
         let isDeviceCompromised = PFApp.shared.isDeviceCompromised()
         
-        deviceSoftwareLabel.text = deviceOSRestricted ? "Device OS Restricted" : "Device OS not Restricted"
-        deviceSecurityLabel.text = screenLock ? "Screen Lock enabled" : "Screen Lock disabled"
-        deviceCompromisedLabel.text = isDeviceCompromised ? "Device is Compromised" : "Device is not Compromised"
+        deviceSoftwareLabel.text = deviceOSRestricted ? "Device OS restricted" : "Device OS not restricted"
+        deviceSecurityLabel.text = screenLock ? "Screen lock enabled" : "Screen lock disabled"
+        deviceCompromisedLabel.text = isDeviceCompromised ? "Device is compromised" : "Device is not compromised"
     }
     
     @IBAction func dismissVC(_ sender: Any) {

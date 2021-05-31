@@ -82,7 +82,6 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 PFApp.shared.getToken()
             } else {
                 self.removeSpinner()
-                self.startApp()
             }
         }
     }
@@ -98,37 +97,37 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         collectionView!.collectionViewLayout = layout
     }
     
-    func startApp() {
-        self.showThreatStatus()
-    }
-
-    
     @IBAction func settingsButton(_ sender: Any) {
         let settingVC = self.storyboard?.instantiateViewController(identifier: "settingVC")
         self.navigationController?.pushViewController(settingVC!, animated: true)
-    }
-    
-    func showThreatStatus() {
-        let threatStatusVC = self.storyboard?.instantiateViewController(identifier: "ThreatStatusVC")
-        self.present(threatStatusVC!, animated: true, completion: nil)
     }
     
     func sparkSDKActive() {
         if firstRun {
             firstRun = false
             self.removeSpinner()
-            self.startApp()
         }
     }
     
-    func sparkAuthRequired() {
+    func sparkAuthRequired(biometricsInvalidated: Bool) {
         self.removeSpinner()
-        let passwordVC = self.storyboard?.instantiateViewController(identifier: "PasswordVC")
-        passwordVC!.isModalInPresentation = true
-        self.present(passwordVC!, animated: true, completion: nil)
+        let passwordVC = self.storyboard?.instantiateViewController(identifier: "PasswordVC") as! PasswordVC
+        passwordVC.isModalInPresentation = true
+        passwordVC.biometricsInvalidated = biometricsInvalidated
+        self.present(passwordVC, animated: true, completion: nil)
     }
     
-    func loginRequired() {
+    func loginRequired(error: String?) {
+        if let err = error {
+            self.showAlert(title: "Error", message: err) {
+                self.presentLoginVC()
+            }
+        } else {
+            presentLoginVC()
+        }
+    }
+    
+    func presentLoginVC() {
         let loginVC = self.storyboard?.instantiateViewController(identifier: "LoginVC")
         loginVC!.isModalInPresentation = true
         self.present(loginVC!, animated: true, completion: nil)

@@ -25,5 +25,9 @@
 		"DataCollectionEnabled": "Enabled",
 		"UploadType": "WIFI_WHILE_CHARGING",
 		"UploadMonthlyLimit": "LIMIT_10MB"
-	}
+	},
+    "DeviceOfflineRules":{
+          "MinutesToMedium":"60",
+          "MinutesToHigh":"120"
+    }
 }		

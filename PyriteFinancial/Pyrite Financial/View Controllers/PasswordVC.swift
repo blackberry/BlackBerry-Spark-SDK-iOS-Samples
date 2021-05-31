@@ -19,6 +19,8 @@ import BlackBerrySecurity
 
 class PasswordVC: UIViewController {
     
+    var biometricsInvalidated = false
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var firstDot: UIImageView!
@@ -152,7 +154,9 @@ class PasswordVC: UIViewController {
                     if PFApp.shared.isBiometricsAvailable() {
                         self.showAlertWithCancel(title: "Biometric", message: "Do you want to use Biometric to unlock the app?", confirm: "Yes", dismiss: "No") { (confirmed) in
                             PFApp.shared.biometricPreference(enable: confirmed)
-                            self.dismiss(animated: true, completion: nil)
+                            self.dismiss(animated: true, completion: {
+                                PFApp.shared.handleStateChange(newState: PFApp.shared.currentInitializationState())
+                            })
                         }
                     } else {
                         self.dismiss(animated: true, completion: nil)
@@ -166,7 +170,16 @@ class PasswordVC: UIViewController {
             }
             if SecurityControl.shared.state == .authenticationRequired {
                 AppAuthentication.shared.enterPassword(passcode)
-                self.dismiss(animated: true, completion: nil)
+                if biometricsInvalidated {
+                    self.showAlertWithCancel(title: "Biometric profile changed", message: "Confirm only your face or fingerprint is enrolled on this device before re-enabling biometric authentication.", confirm: "Enable Biometrics", dismiss: "Dismiss") { (confirmed) in
+                        PFApp.shared.biometricPreference(enable: confirmed)
+                        self.dismiss(animated: true, completion: {
+                            PFApp.shared.handleStateChange(newState: PFApp.shared.currentInitializationState())
+                        })
+                    }
+                } else {
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
         }
     }

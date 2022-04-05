@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
- platform :ios, '12.0'
+ platform :ios, '14.0' 
 
 target 'Pyrite Financial' do
   use_frameworks!
@@ -8,6 +8,7 @@ target 'Pyrite Financial' do
   #Firebase Auth is used as an Identity Manager in the app
   pod 'Firebase/Auth'
   
-  pod 'BlackBerrySecurity', :podspec => 'https://software.download.blackberry.com/repository/framework/appsecure/ios/BlackBerrySecurity-latest.podspec'
-  
+  pod 'BlackBerrySecurity', :podspec => 'https://software.download.blackberry.com/repository/framework/appsecure/ios/BlackBerrySecurity.podspec'
+
+    
 end

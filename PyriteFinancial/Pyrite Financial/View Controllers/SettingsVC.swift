@@ -36,8 +36,8 @@ class SettingsVC: UIViewController {
     }
     
     @IBAction func getNewRules(_ sender: Any) {
-        let gitHuburl = "https://raw.githubusercontent.com/gghangura/rules/master/rules.json"
-        let url = "http://localhost:3000/rules?appAuthenticityID=" + PFApp.shared.getAuthenticityID() + "&appInstanceID=" + PFApp.shared.getInstanceIdentifier()
+        let gitHuburl = "https://raw.githubusercontent.com/matt-falkner/PyriteStaticRules/main/rules.json"
+        //let url = "http://0.0.0.0:3000/rules?appAuthenticityID=" + PFApp.shared.getAuthenticityID() + "&appInstanceID=" + PFApp.shared.getInstanceIdentifier()
         var request = URLRequest(url: URL(string: gitHuburl)!)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -62,11 +62,9 @@ class SettingsVC: UIViewController {
         PFApp.shared.uploadLogs { (status) in
             DispatchQueue.main.async {
                 self.uploadStatus.text = status
-                
                 if status == "Completed" {
                     self.showAlert(title: "Upload Successful", message: "Logs uploaded with ContainerID - " + PFApp.shared.getContainerId(), callback: {})
                 }
-                
             }
         }
     }

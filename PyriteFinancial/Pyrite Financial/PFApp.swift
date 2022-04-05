@@ -159,108 +159,194 @@ class PFApp {
     }
     
     func checkUrl(url : String, completion: @escaping (Bool) -> Void) {
-        _ = ContentChecker.checkURL(url) { (int, result) in
-            switch result {
-            case .safe:
-                completion(true)
-                break
-            case .unsafe:
-                completion(false)
-                break
-            case .unavailable:
-                completion(false)
-                break
-            default:
-                break
+        do {
+            _ = try ContentChecker.checkURL(url) { (int, result) in
+                switch result {
+                case .safe:
+                    completion(true)
+                    break
+                case .unsafe:
+                    completion(false)
+                    break
+                case .unavailable:
+                    completion(false)
+                    break
+                default:
+                    break
+                }
             }
+        }
+        catch {
+            print("Failed to check URL: \(error)")
         }
     }
     
     func isDeviceOSRestricted() -> Bool {
-        let deviceOSThreat = ThreatStatus().threat(ofType: .deviceSoftware) as! ThreatDeviceSoftware
-        return deviceOSThreat.isDeviceOSRestricted
-    }
-    
-    func isScreenLockEnabled() -> Bool {
-        let deviceSecurity = ThreatStatus().threat(ofType: .deviceSecurity) as! ThreatDeviceSecurity
-        return deviceSecurity.isScreenLockEnabled
-    }
-    
-    func isDeviceCompromised() -> Bool {
-        let deviceSecurity = ThreatStatus().threat(ofType: .deviceSecurity) as! ThreatDeviceSecurity
-        return deviceSecurity.isDeviceCompromised
-    }
-    
-    func updateThreatStatus() {
-        DeviceChecker.checkDeviceSecurity()
-    }
-    
-    func getVersion() -> String {
-        return Diagnostics.runtimeVersion;
-    }
-    
-    func getContainerId() -> String {
-        return Diagnostics.appContainerID
-    }
-    
-    func getInstanceIdentifier() -> String {
-        return AppIdentity.init().appInstanceIdentifier
-    }
-    
-    func getAuthenticityID() -> String {
-        return AppIdentity().authenticityIdentifiers[.authenticity]!
-    }
-    
-    func uploadLogs(callback: @escaping (String) -> Void) {
-        Diagnostics.uploadLogs(reason: "Uploading Logs from Settings") { (status) in
-            switch status {
-            case .busy:
-                callback("Busy")
-                break
-            case .completed:
-                callback("Completed")
-                break
-            case .failed:
-                callback("Failed")
-                break
-            @unknown default:
-                callback("Unknown")
-                break
-            }
+        do {
+            let deviceOSThreat = try ThreatStatus().threat(ofType: .deviceSoftware) as! ThreatDeviceSoftware
+            return try deviceOSThreat.isDeviceOSRestricted.get()
+            
+        }
+        catch {
+            print("An Error Occured getting Threat Status: \(error)")
+            return true
         }
     }
     
-    func enableDataCollection() {
-        _ = ManageRules.setDataCollectionRules(DataCollectionRules.init().enableDataCollection())
+    func isScreenLockEnabled() -> Bool {
+        let deviceSecurity = try! ThreatStatus().threat(ofType: .deviceSecurity) as! ThreatDeviceSecurity
+        return try! deviceSecurity.isScreenLockEnabled.get()
     }
+    
+    func isDeviceCompromised() -> Bool {
+        let deviceSecurity = try! ThreatStatus().threat(ofType: .deviceSecurity) as! ThreatDeviceSecurity
+        return try! deviceSecurity.isDeviceCompromised.get()
+    }
+    
+    func updateThreatStatus() {
+        do {
+            try DeviceChecker.checkDeviceSecurity()
+        }
+        catch {
+            print("Error updating threat status: \(error)")
+        }
+    }
+    
+    func getVersion() -> String {
+        do {
+            let value = try Diagnostics.runtimeVersion.get()
+            print("The value is \(value).")
+            return value
+        } catch {
+            print("Error retrieving the value: \(error)")
+            return "error"
+        }
+    }
+    
+    func getContainerId() -> String {
+        do {
+            let appContainerId = try Diagnostics.appContainerID.get()
+            return appContainerId
+        } catch {
+            print("Error retrieving the ContainerID: \(error)")
+            return "error"
+        }
+    }
+    
+    func getInstanceIdentifier() -> String {
+        do {
+            let instanceId = try AppIdentity.init().appInstanceIdentifier.get()
+            return instanceId
+        } catch {
+            print("Error retrieving the InstanceId: \(error)")
+            return "error"
+        }
+    }
+    
+    func getAuthenticityID() -> String {
+        do {
+            let dict = try AppIdentity().authenticityIdentifiers.get()
+            let authenticity = dict[.authenticity]!
+            return authenticity
+        } catch {
+            print("Error retrieving the AuthenticityId: \(error)")
+            return "error"
+        }
+    }
+    
+    func uploadLogs(callback: @escaping (String) -> Void) {
+        do {
+            try Diagnostics.uploadLogs(reason: "Uploading Logs from Settings") { status in
+                switch status {
+                case .busy:
+                    print("Busy uploading logs: unknown: \(status)")
+                    callback("Busy")
+                    break
+                case .completed:
+                    callback("Completed")
+                    break
+                case .failed:
+                    print("Failed to upload logs: \(status)")
+                    callback("Failed")
+                    break
+                @unknown default:
+                    print("Failed to upload logs: unknown: \(status)")
+                    callback("Unknown")
+                    break
+                }
+            }
+        }
+        catch {
+            print("Failed to upload logs with error: \(error)")
+        }
+    }
+    
     
     func checkIfExists(fileName : String, create: Bool, initialValue: String?) -> Bool {
         let filePath = getDocumentsDirectory(fileName: fileName)
         
-        if (!BBSFileManager.default!.fileExists(atPath: filePath)) {
-            if create {
-                return BBSFileManager.default!.createFile(atPath: filePath, contents: initialValue!.data(using: .utf8), attributes: nil)
-            } else {
-                return false
-            }
+        guard case .success(let fileManager) = BBSFileManager.default, let manager = fileManager else {
+            print("Failed to get BBSFileManager instance")
+            return false
         }
-        return true
+    
+        do {
+            let fileExists = try manager.fileExists(atPath: filePath)
+            if (!fileExists) {
+                if create { 
+                    let result = try manager.createFile(atPath: filePath, contents: initialValue!.data(using: .utf8), attributes: nil)
+                    return result
+                } else { 
+                    return false
+                }
+            } else {
+                return true
+            } 
+        }
+        catch {
+            print("Error Checking if file exists/creating non-existing file: \(error)")
+            return false
+        }
+    
     }
     
     func contentsOfFile(fileName : String) -> Data? {
         let filePath = getDocumentsDirectory(fileName: fileName)
         
-        if (!(BBSFileManager.default!.fileExists(atPath: filePath))) {
+        guard case .success(let fileManager) = BBSFileManager.default, let manager = fileManager else {
+            print("Failed to get BBSFileManager instance")
             return nil
-        } else {
-            return BBSFileManager.default!.contents(atPath: filePath)
+        }
+        
+        do {
+            let fileExists =  try manager.fileExists(atPath: filePath)
+
+            if (!fileExists) {
+                return nil
+            } else {
+                return try manager.contents(atPath: filePath)
+            }
+        }
+        catch {
+            print("Error Occurred checking contents of file: \(error)")
+            return nil
         }
     }
     
     func saveInFile(fileName: String, value : String) {
         let filePath = getDocumentsDirectory(fileName: fileName)
-        
-        _ = BBSFileManager.default!.createFile(atPath: filePath, contents: value.data(using: .utf8), attributes: nil)
+        guard case .success(let fileManager) = BBSFileManager.default, let manager = fileManager else {
+            print("Failed to get BBSFileManager instance")
+            return
+        }
+        do {
+            _ = try manager.createFile(atPath: filePath, contents: value.data(using: .utf8), attributes: nil)
+        }
+        catch {
+            print("Error Occurred checking contents of file: \(error)")
+            return
+        }
+
     }
     
     func getDocumentsDirectory(fileName : String) -> String {
